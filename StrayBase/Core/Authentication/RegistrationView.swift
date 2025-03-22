@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  RegistrationView.swift
 //  StrayBase
 //
 //  Created by Nino Nozadze on 22.03.25.
@@ -7,17 +7,21 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct RegistrationView: View {
     
     @State private var email: String = ""
+    @State private var fullName: String = ""
     @State private var password: String = ""
+    @State private var confirmPassword: String = ""
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         
         NavigationStack {
+            
+            Spacer()
+            
             VStack {
-                Spacer()
-                
                 Image("pet-care")
                     .resizable()
                     .scaledToFill()
@@ -30,19 +34,28 @@ struct LoginView: View {
                               placeholder: "name@example.com")
                     .autocapitalization(.none)
                     
+                    InputView(text: $fullName,
+                              title: "Full Name",
+                              placeholder: "Enter your name")
+                    
                     InputView(text: $password,
                               title: "Password",
                               placeholder: "Enter your password",
+                              isSecuredField: true)
+                    
+                    InputView(text: $confirmPassword,
+                              title: "Confirm Password",
+                              placeholder: "Confirm your password",
                               isSecuredField: true)
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)
                 
                 Button {
-                    print("sign in") // TODO: Tmp
+                    print("sign up") // TODO: Tmp
                 } label: {
                     HStack {
-                        Text("SIGN IN")
+                        Text("SIGN UP")
                             .fontWeight(.semibold)
                         Image(systemName: "arrow.right")
                     }
@@ -56,26 +69,24 @@ struct LoginView: View {
                 
                 Spacer()
                 
-                NavigationLink {
-                    RegistrationView()
-                        .navigationBarBackButtonHidden(true)
+                Button {
+                    dismiss()
                 } label: {
                     HStack(spacing: 3) {
-                        Text("Don't have an account?")
-                        Text("Sign Up")
+                        Text("Already have an account?")
+                        Text("Sign in")
                             .fontWeight(.bold)
                     }
                     .font(.system(size: 14))
                 }
-                
             }
         }
         
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        RegistrationView()
     }
 }
