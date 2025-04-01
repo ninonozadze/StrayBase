@@ -25,15 +25,19 @@ struct LoginView: View {
                     .padding(.vertical, 32)
                 
                 VStack(spacing: 24) {
-                    InputView(text: $email,
-                              title: "Email Address",
-                              placeholder: "name@example.com")
+                    InputView(
+                        text: $email,
+                        title: "Email Address",
+                        placeholder: "name@example.com"
+                    )
                     .autocapitalization(.none)
                     
-                    InputView(text: $password,
-                              title: "Password",
-                              placeholder: "Enter your password",
-                              isSecuredField: true)
+                    InputView(
+                        text: $password,
+                        title: "Password",
+                        placeholder: "Enter your password",
+                        isSecuredField: true
+                    )
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)

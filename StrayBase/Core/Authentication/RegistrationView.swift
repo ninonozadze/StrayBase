@@ -29,24 +29,32 @@ struct RegistrationView: View {
                     .padding(.vertical, 32)
                 
                 VStack(spacing: 24) {
-                    InputView(text: $email,
-                              title: "Email Address",
-                              placeholder: "name@example.com")
+                    InputView(
+                        text: $email,
+                        title: "Email Address",
+                        placeholder: "name@example.com"
+                    )
                     .autocapitalization(.none)
                     
-                    InputView(text: $fullName,
-                              title: "Full Name",
-                              placeholder: "Enter your name")
+                    InputView(
+                        text: $fullName,
+                        title: "Full Name",
+                        placeholder: "Enter your name"
+                    )
                     
-                    InputView(text: $password,
-                              title: "Password",
-                              placeholder: "Enter your password",
-                              isSecuredField: true)
+                    InputView(
+                        text: $password,
+                        title: "Password",
+                        placeholder: "Enter your password",
+                        isSecuredField: true
+                    )
                     
-                    InputView(text: $confirmPassword,
-                              title: "Confirm Password",
-                              placeholder: "Confirm your password",
-                              isSecuredField: true)
+                    InputView(
+                        text: $confirmPassword,
+                        title: "Confirm Password",
+                        placeholder: "Confirm your password",
+                        isSecuredField: true
+                    )
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)
