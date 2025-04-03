@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+private typealias RegistrationViewConsts = SharedUtils.AuthenticationViews.RegistrationView
+
 struct RegistrationView: View {
     
     @State private var email: String = ""
@@ -22,7 +24,7 @@ struct RegistrationView: View {
             Spacer()
             
             VStack {
-                Image("pet-care")
+                Image(RegistrationViewConsts.registrationImageName)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 120)
@@ -31,28 +33,28 @@ struct RegistrationView: View {
                 VStack(spacing: 24) {
                     InputView(
                         text: $email,
-                        title: "Email Address",
-                        placeholder: "name@example.com"
+                        title: RegistrationViewConsts.emailInputTitle,
+                        placeholder: RegistrationViewConsts.emailInputPlaceholder
                     )
                     .autocapitalization(.none)
                     
                     InputView(
                         text: $fullName,
-                        title: "Full Name",
-                        placeholder: "Enter your name"
+                        title: RegistrationViewConsts.fullnameInputTitle,
+                        placeholder: RegistrationViewConsts.fullnameInputPlaceholder
                     )
                     
                     InputView(
                         text: $password,
-                        title: "Password",
-                        placeholder: "Enter your password",
+                        title: RegistrationViewConsts.passwordInputTitle,
+                        placeholder: RegistrationViewConsts.passwordInputPlaceholder,
                         isSecuredField: true
                     )
                     
                     InputView(
                         text: $confirmPassword,
-                        title: "Confirm Password",
-                        placeholder: "Confirm your password",
+                        title: RegistrationViewConsts.confirmPasswordInputTitle,
+                        placeholder: RegistrationViewConsts.confirmPasswordInputPlaceholder,
                         isSecuredField: true
                     )
                 }
@@ -63,9 +65,9 @@ struct RegistrationView: View {
                     print("sign up") // TODO: Tmp
                 } label: {
                     HStack {
-                        Text("SIGN UP")
+                        Text(RegistrationViewConsts.signUpButtonTitle)
                             .fontWeight(.semibold)
-                        Image(systemName: "arrow.right")
+                        Image(systemName: RegistrationViewConsts.signUpButtonImageName)
                     }
                     .foregroundStyle(.white)
                     .frame(width: UIScreen.main.bounds.width - 32,
@@ -81,8 +83,8 @@ struct RegistrationView: View {
                     dismiss()
                 } label: {
                     HStack(spacing: 3) {
-                        Text("Already have an account?")
-                        Text("Sign in")
+                        Text(RegistrationViewConsts.signInDescription)
+                        Text(RegistrationViewConsts.signInText)
                             .fontWeight(.bold)
                     }
                     .font(.system(size: 14))

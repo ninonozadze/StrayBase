@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+private typealias ProfileViewConsts = SharedUtils.AuthenticationViews.ProfileView
+
 struct ProfileView: View {
     var body: some View {
         List {
@@ -33,11 +35,11 @@ struct ProfileView: View {
                 }
             }
             
-            Section("General") {
+            Section(ProfileViewConsts.generalSectionTitle) {
                 HStack {
                     SettingsRowView(
-                        imageName: "gear",
-                        title: "Version",
+                        imageName: ProfileViewConsts.versionImageName,
+                        title: ProfileViewConsts.versionTitle,
                         tintColor: Color(.systemGray)
                     )
                     
@@ -49,13 +51,13 @@ struct ProfileView: View {
                 }
             }
             
-            Section("Account") {
+            Section(ProfileViewConsts.accountSectionTitle) {
                 Button {
                     print("sign out") // TODO: tmp
                 } label: {
                     SettingsRowView(
-                        imageName: "arrow.left.circle.fill",
-                        title: "Sign Out",
+                        imageName: ProfileViewConsts.signOutImageName,
+                        title: ProfileViewConsts.signOutTitle,
                         tintColor: .red
                     )
                 }
@@ -64,8 +66,8 @@ struct ProfileView: View {
                     print("delete") // TODO: tmp
                 } label: {
                     SettingsRowView(
-                        imageName: "xmark.circle.fill",
-                        title: "Delete Account",
+                        imageName: ProfileViewConsts.deleteAccountImageName,
+                        title: ProfileViewConsts.deleteAccountTitle,
                         tintColor: .red
                     )
                 }

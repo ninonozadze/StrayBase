@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+private typealias LoginViewConsts = SharedUtils.AuthenticationViews.LoginView
+
 struct LoginView: View {
     
     @State private var email: String = ""
@@ -18,7 +20,7 @@ struct LoginView: View {
             VStack {
                 Spacer()
                 
-                Image("pet-care")
+                Image(LoginViewConsts.loginImageName)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 120)
@@ -27,15 +29,15 @@ struct LoginView: View {
                 VStack(spacing: 24) {
                     InputView(
                         text: $email,
-                        title: "Email Address",
-                        placeholder: "name@example.com"
+                        title: LoginViewConsts.emailInputTitle,
+                        placeholder: LoginViewConsts.emailInputPlaceholder
                     )
                     .autocapitalization(.none)
                     
                     InputView(
                         text: $password,
-                        title: "Password",
-                        placeholder: "Enter your password",
+                        title: LoginViewConsts.passwordInputTitle,
+                        placeholder: LoginViewConsts.passwordInputPlaceholder,
                         isSecuredField: true
                     )
                 }
@@ -46,9 +48,9 @@ struct LoginView: View {
                     print("sign in") // TODO: Tmp
                 } label: {
                     HStack {
-                        Text("SIGN IN")
+                        Text(LoginViewConsts.signInButtonTitle)
                             .fontWeight(.semibold)
-                        Image(systemName: "arrow.right")
+                        Image(systemName: LoginViewConsts.signInButtonImageName)
                     }
                     .foregroundStyle(.white)
                     .frame(width: UIScreen.main.bounds.width - 32,
@@ -65,8 +67,8 @@ struct LoginView: View {
                         .navigationBarBackButtonHidden(true)
                 } label: {
                     HStack(spacing: 3) {
-                        Text("Don't have an account?")
-                        Text("Sign Up")
+                        Text(LoginViewConsts.notAccountText)
+                        Text(LoginViewConsts.signupText)
                             .fontWeight(.bold)
                     }
                     .font(.system(size: 14))
