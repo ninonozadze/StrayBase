@@ -44,21 +44,12 @@ struct LoginView: View {
                 .padding(.horizontal)
                 .padding(.top, 12)
                 
-                Button {
-                    print("sign in") // TODO: Tmp
-                } label: {
-                    HStack {
-                        Text(LoginViewConsts.signInButtonTitle)
-                            .fontWeight(.semibold)
-                        Image(systemName: LoginViewConsts.signInButtonImageName)
-                    }
-                    .foregroundStyle(.white)
-                    .frame(width: UIScreen.main.bounds.width - 32,
-                           height: 48)
+                PrimaryButton(
+                    title: LoginViewConsts.signInButtonTitle,
+                    imageName: LoginViewConsts.signInButtonImageName
+                ) {
+                    print("sign in")
                 }
-                .background(Color(.systemBlue))
-                .cornerRadius(10)
-                .padding(.top, 24)
                 
                 Spacer()
                 

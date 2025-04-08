@@ -61,21 +61,12 @@ struct RegistrationView: View {
                 .padding(.horizontal)
                 .padding(.top, 12)
                 
-                Button {
-                    print("sign up") // TODO: Tmp
-                } label: {
-                    HStack {
-                        Text(RegistrationViewConsts.signUpButtonTitle)
-                            .fontWeight(.semibold)
-                        Image(systemName: RegistrationViewConsts.signUpButtonImageName)
-                    }
-                    .foregroundStyle(.white)
-                    .frame(width: UIScreen.main.bounds.width - 32,
-                           height: 48)
+                PrimaryButton(
+                    title: RegistrationViewConsts.signUpButtonTitle,
+                    imageName: RegistrationViewConsts.signUpButtonImageName
+                ) {
+                    print("sign up")
                 }
-                .background(Color(.systemBlue))
-                .cornerRadius(10)
-                .padding(.top, 24)
                 
                 Spacer()
                 
