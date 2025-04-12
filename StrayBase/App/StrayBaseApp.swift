@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct StrayBaseApp: App {
+    
+    @StateObject var viewModel = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewModel)
         }
     }
+    
 }

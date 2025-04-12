@@ -13,6 +13,7 @@ struct LoginView: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         
@@ -48,7 +49,12 @@ struct LoginView: View {
                     title: LoginViewConsts.signInButtonTitle,
                     imageName: LoginViewConsts.signInButtonImageName
                 ) {
-                    print("sign in")
+                    Task {
+                        try await viewModel.signIn(
+                            withEmail: email,
+                            password: password
+                        )
+                    }
                 }
                 
                 Spacer()

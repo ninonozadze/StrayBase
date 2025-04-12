@@ -12,10 +12,11 @@ private typealias RegistrationViewConsts = SharedUtils.AuthenticationViews.Regis
 struct RegistrationView: View {
     
     @State private var email: String = ""
-    @State private var fullName: String = ""
+    @State private var fullname: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         
@@ -39,7 +40,7 @@ struct RegistrationView: View {
                     .autocapitalization(.none)
                     
                     InputView(
-                        text: $fullName,
+                        text: $fullname,
                         title: RegistrationViewConsts.fullnameInputTitle,
                         placeholder: RegistrationViewConsts.fullnameInputPlaceholder
                     )
@@ -65,7 +66,13 @@ struct RegistrationView: View {
                     title: RegistrationViewConsts.signUpButtonTitle,
                     imageName: RegistrationViewConsts.signUpButtonImageName
                 ) {
-                    print("sign up")
+                    Task {
+                        try await viewModel.createUser(
+                            withEmail: email,
+                            password: password,
+                            fullname: fullname
+                        )
+                    }
                 }
                 
                 Spacer()
