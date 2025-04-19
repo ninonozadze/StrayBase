@@ -57,7 +57,7 @@ struct ProfileView: View {
                 
                 Section(ProfileViewConsts.accountSectionTitle) {
                     Button {
-                        print("sign out") // TODO: tmp
+                        viewModel.signOut()
                     } label: {
                         SettingsRowView(
                             imageName: ProfileViewConsts.signOutImageName,
