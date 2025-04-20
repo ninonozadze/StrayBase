@@ -56,6 +56,8 @@ struct LoginView: View {
                         )
                     }
                 }
+                .disabled(!formIsValid)
+                .opacity(formIsValid ? 1 : 0.5)
                 
                 Spacer()
                 
@@ -74,6 +76,15 @@ struct LoginView: View {
             }
         }
         
+    }
+}
+
+extension LoginView: AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        return !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
     }
 }
 
