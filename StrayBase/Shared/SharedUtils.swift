@@ -65,7 +65,9 @@ extension SharedUtils {
             static let deleteAccountImageName: String = "xmark.circle.fill"
             static let deleteAccountTitle: String = "Delete Account"
         }
+        
     }
+    
 }
 
 extension SharedUtils {

@@ -1,13 +1,13 @@
 //
-//  DashboardTabView.swift
+//  SheltersListTabView.swift
 //  StrayBase
 //
-//  Created by Nino Nozadze on 21.03.25.
+//  Created by Nino Nozadze on 02.05.25.
 //
 
 import SwiftUI
 
-struct DashboardTabView: View {
+struct SheltersListTabView: View {
     var body: some View {
         VStack {
             Image("pet-care") // TODO: tmp
@@ -17,7 +17,7 @@ struct DashboardTabView: View {
                        height: UIScreen.main.bounds.width / 7)
                 .foregroundColor(.gray)
             
-            Text("DashboardTabView") // TODO: tmp
+            Text("SheltersListTabView") // TODO: tmp
                 .font(.title3)
                 .fontWeight(.bold)
                 .padding()
@@ -27,8 +27,8 @@ struct DashboardTabView: View {
     }
 }
 
-struct DashboardTabView_Previews: PreviewProvider {
+struct SheltersListTabView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardTabView()
+        SheltersListTabView()
     }
 }
