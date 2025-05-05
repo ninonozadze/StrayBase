@@ -10,8 +10,6 @@ import SwiftUI
 private typealias TabViewsConst = SharedUtils.TabViews
 
 struct UserContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
     
     var body: some View {
         TabView {
@@ -23,16 +21,6 @@ struct UserContentView: View {
             .tabItem {
                 Label(TabViewsConst.DashboardTabView.tabItemLabel,
                       systemImage: TabViewsConst.DashboardTabView.tabItemImageName)
-            }
-            
-            NavigationStack {
-                ProfileTabView()
-                    .navigationTitle("Categories") // TODO: tmp constants
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .tabItem {
-                Label("Profile",
-                      systemImage: "person.fill") // TODO: tmp constants
             }
             
             NavigationStack {

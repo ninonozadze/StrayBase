@@ -61,7 +61,7 @@ struct RegistrationView: View {
                         )
                         
                         if !password.isEmpty && !confirmPassword.isEmpty {
-                            if password = confirmPassword {
+                            if password == confirmPassword {
                                 Image(systemName: "checkmark.circle.fill")
                                     .imageScale(.large)
                                     .fontWeight(.bold)

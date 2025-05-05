@@ -67,7 +67,9 @@ struct ProfileView: View {
                     }
                     
                     Button {
-                        print("delete") // TODO: tmp
+                        Task {
+                            try await viewModel.deleteAccount()
+                        }
                     } label: {
                         SettingsRowView(
                             imageName: ProfileViewConsts.deleteAccountImageName,

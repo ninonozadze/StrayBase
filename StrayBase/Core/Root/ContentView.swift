@@ -13,12 +13,12 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-//            if viewModel.userSession != nil {
-//                ProfileView()
-//            } else {
-//                LoginView()
-//            }
-            UserContentView() // TODO: tmp
+            if viewModel.userSession != nil {
+                ProfileView()
+            } else {
+                LoginView()
+            }
+//            UserContentView() // TODO: tmp
         }
     }
 }
