@@ -11,6 +11,20 @@ struct SharedUtils {}
 
 extension SharedUtils {
     
+    struct Authentication {
+        static let verificationMessageWhenSent: String = "A verification email has been sent to {1s}. Please check your inbox and click the verification link before proceeding."
+        static let noPendingVerificationMessage: String = "No pending registration found."
+        static let successfulVerificationMessage: String = "Email verified successfully! Registration completed."
+        static let notVerifiedMessage: String = "Email not verified yet. Please check your inbox and click the verification link."
+        static let failedtoVerifyMessage: String = "Failed to verify email: {1s}"
+        static let resentVerificationMessage: String = "Verification email resent to {1s}."
+        static let failedtoResendVerificationMessage: String = "Failed to resend verification email: {1s}."
+    }
+    
+}
+
+extension SharedUtils {
+    
     struct AuthenticationViews {
         
         struct LoginView {
@@ -49,6 +63,9 @@ extension SharedUtils {
             
             static let signInText: String = "Sign in"
             static let signInDescription: String = "Already have an account?"
+            
+            static let passwordCheckmarkIconName: String = "checkmark.circle.fill"
+            static let passwordXmarkIconName: String = "xmark.circle.fill"
         }
         
         struct ProfileView {
@@ -64,6 +81,21 @@ extension SharedUtils {
             
             static let deleteAccountImageName: String = "xmark.circle.fill"
             static let deleteAccountTitle: String = "Delete Account"
+        }
+        
+        struct EmailVerificationView {
+            static let verificationMainImageName: String = "envelope.circle.fill"
+            static let verificationMainText: String = "Verify Your Email"
+            
+            static let verificationButtonTitle: String = "I've Verified My Email"
+            static let verificationButtonIcon: String = "checkmark.circle"
+            
+            static let resendButtonTitle: String = "Resend Email"
+            static let resendButtonIcon: String = "arrow.clockwise"
+            
+            static let alertRegistrationStatus: String = "Registration Status"
+            static let alertRegistrationButton: String = "Continue"
+            static let alertRegistrationMessage: String = "Your email has been verified and registration is complete!"
         }
         
     }
