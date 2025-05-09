@@ -7,20 +7,23 @@
 
 import SwiftUI
 
-struct EmailVerificationView: View {
-    @ObservedObject var viewModel: AuthViewModel
-    var dismissAction: () -> Void
+private typealias VerificationViewConsts = SharedUtils.AuthenticationViews.EmailVerificationView
 
+struct EmailVerificationView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
+    var dismissAction: () -> Void
+    @State private var showAlert = false
+    
     var body: some View {
         VStack(spacing: 20) {
             Spacer()
             
-            Image(systemName: "envelope.circle.fill")
+            Image(systemName: VerificationViewConsts.verificationMainImageName)
                 .font(.system(size: 80))
                 .foregroundColor(.blue)
                 .padding(.bottom, 20)
             
-            Text("Verify Your Email")
+            Text(VerificationViewConsts.verificationMainText)
                 .font(.title2)
                 .fontWeight(.bold)
             
@@ -34,8 +37,8 @@ struct EmailVerificationView: View {
             
             VStack(spacing: 16) {
                 PrimaryButton(
-                    title: "I've Verified My Email",
-                    imageName: "checkmark.circle"
+                    title: VerificationViewConsts.verificationButtonTitle,
+                    imageName: VerificationViewConsts.verificationButtonIcon
                 ) {
                     Task {
                         try await viewModel.checkEmailVerificationAndCompleteRegistration()
@@ -50,9 +53,9 @@ struct EmailVerificationView: View {
                     }
                 }) {
                     HStack {
-                        Text("Resend Email")
+                        Text(VerificationViewConsts.resendButtonTitle)
                             .fontWeight(.semibold)
-                        Image(systemName: "arrow.clockwise")
+                        Image(systemName: VerificationViewConsts.resendButtonIcon)
                     }
                     .foregroundColor(.blue)
                     .frame(width: UIScreen.main.bounds.width - 32, height: 48)
@@ -66,10 +69,15 @@ struct EmailVerificationView: View {
             }
             .padding(.top, 30)
             
-            if viewModel.isLoading {
-                ProgressView()
-                    .padding(.top, 20)
+            ZStack {
+                if viewModel.isLoading {
+                    ProgressView()
+                } else {
+                    Color.clear
+                        .frame(height: 20)
+                }
             }
+            .padding(.top, 20)
             
             Spacer()
             
@@ -85,12 +93,18 @@ struct EmailVerificationView: View {
             }
         }
         .padding(.horizontal, 20)
-        .alert("Registration Status", isPresented: .constant(viewModel.isEmailVerified)) {
-            Button("Continue") {
+        .onChange(of: viewModel.isEmailVerified) { newValue in
+            if newValue {
+                showAlert = true
+            }
+        }
+        .alert(VerificationViewConsts.alertRegistrationStatus,
+               isPresented: .constant(viewModel.isEmailVerified)) {
+            Button(VerificationViewConsts.alertRegistrationButton) {
                 dismissAction()
             }
         } message: {
-            Text("Your email has been verified and registration is complete!")
+            Text(VerificationViewConsts.alertRegistrationMessage)
         }
     }
 }
