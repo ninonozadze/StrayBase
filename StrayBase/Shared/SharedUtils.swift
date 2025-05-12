@@ -66,6 +66,10 @@ extension SharedUtils {
             
             static let passwordCheckmarkIconName: String = "checkmark.circle.fill"
             static let passwordXmarkIconName: String = "xmark.circle.fill"
+            
+            static let registrationErrorTitle: String = "Registration Error"
+            static let registrationErrorButton: String = "OK"
+            static let registrationUnknownError: String = "Unknown error."
         }
         
         struct ProfileView {

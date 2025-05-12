@@ -131,10 +131,12 @@ struct RegistrationView: View {
                 .font(.system(size: 14))
             }
         }
-        .alert("Registration Error", isPresented: $showErrorAlert) {
-            Button("OK", role: .cancel) {}
+        .alert(RegistrationViewConsts.registrationErrorTitle,
+               isPresented: $showErrorAlert) {
+            Button(RegistrationViewConsts.registrationErrorButton,
+                   role: .cancel) {}
         } message: {
-            Text(viewModel.verificationMessage ?? "Unknown error.")
+            Text(viewModel.verificationMessage ?? RegistrationViewConsts.registrationUnknownError)
         }
         
     }
