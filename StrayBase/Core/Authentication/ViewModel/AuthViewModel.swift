@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 import FirebaseFirestoreSwift
 
 private typealias AuthenticationConsts = SharedUtils.Authentication
@@ -36,6 +37,9 @@ class AuthViewModel: ObservableObject {
     
     func signIn(withEmail email: String,
                 password: String) async throws {
+        isLoading = true
+        defer { isLoading = false }
+        
         do {
             let result = try await Auth.auth().signIn(
                 withEmail: email,
@@ -46,8 +50,51 @@ class AuthViewModel: ObservableObject {
             
         } catch {
             print("DEBUG: Failed to sign in with error - \(error.localizedDescription)")
-            throw error
+            throw handleAuthError(error)
         }
+    }
+    
+    private func handleAuthError(_ error: Error) -> Error {
+        guard let authError = error as NSError? else {
+            return NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: AuthenticationConsts.loginUnknownError])
+        }
+        
+        let errorMessage: String
+        
+        switch AuthErrorCode.Code(rawValue: authError.code) {
+        case .invalidEmail:
+            errorMessage = AuthenticationConsts.invalidEmailError
+            
+        case .userDisabled:
+            errorMessage = AuthenticationConsts.userDisabledError
+            
+        case .tooManyRequests:
+            errorMessage = AuthenticationConsts.tooManyRequestsError
+            
+        case .networkError:
+            errorMessage = AuthenticationConsts.networkError
+            
+        case .invalidCredential:
+            errorMessage = AuthenticationConsts.invalidCredentialError
+            
+        case .userTokenExpired:
+            errorMessage = AuthenticationConsts.tokenExpiredError
+            
+        case .requiresRecentLogin:
+            errorMessage = AuthenticationConsts.requiresRecentLoginError
+            
+        default:
+            errorMessage = AuthenticationConsts.loginUnknownError.replacingOccurrences(
+                of: "{1s}",
+                with: authError.localizedDescription
+            )
+        }
+        
+        return NSError(
+            domain: "AuthError",
+            code: authError.code,
+            userInfo: [NSLocalizedDescriptionKey: errorMessage]
+        )
     }
     
     func createUser(withEmail email: String,

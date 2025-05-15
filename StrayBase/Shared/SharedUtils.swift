@@ -19,6 +19,15 @@ extension SharedUtils {
         static let failedtoVerifyMessage: String = "Failed to verify email: {1s}"
         static let resentVerificationMessage: String = "Verification email resent to {1s}."
         static let failedtoResendVerificationMessage: String = "Failed to resend verification email: {1s}."
+        
+        static let invalidEmailError = "Please enter a valid email address."
+        static let userDisabledError = "This account has been disabled. Please contact support."
+        static let tooManyRequestsError = "Too many failed attempts. Please try again later."
+        static let networkError = "Network error. Please check your internet connection and try again."
+        static let invalidCredentialError = "Invalid email or password. Please check your credentials and try again."
+        static let tokenExpiredError = "Your session has expired. Please try signing in again."
+        static let requiresRecentLoginError = "This operation requires recent authentication. Please sign in again."
+        static let loginUnknownError = "An unknown error occurred: {1s}"
     }
     
 }
@@ -41,6 +50,10 @@ extension SharedUtils {
             
             static let notAccountText: String = "Don't have an account?"
             static let signupText: String = "Sign Up"
+            
+            static let loginErrorTitle = "Sign In Failed"
+            static let loginErrorButton = "OK"
+            static let loginUnknownError = "An unknown error occurred during sign in"
         }
         
         struct RegistrationView {

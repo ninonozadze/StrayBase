@@ -14,6 +14,8 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var showErrorAlert = false
+    @State private var errorMessage: String = ""
     
     var body: some View {
         
@@ -50,14 +52,23 @@ struct LoginView: View {
                     imageName: LoginViewConsts.signInButtonImageName
                 ) {
                     Task {
-                        try await viewModel.signIn(
-                            withEmail: email,
-                            password: password
-                        )
+                        do {
+                            try await viewModel.signIn(
+                                withEmail: email,
+                                password: password
+                            )
+                        } catch {
+                            errorMessage = error.localizedDescription
+                            showErrorAlert = true
+                        }
                     }
                 }
-                .disabled(!formIsValid)
-                .opacity(formIsValid ? 1 : 0.5)
+                .disabled(!formIsValid || viewModel.isLoading)
+                .opacity((formIsValid && !viewModel.isLoading) ? 1 : 0.5)
+
+                ProgressView()
+                    .padding(.top, 10)
+                    .opacity(viewModel.isLoading ? 1 : 0)
                 
                 Spacer()
                 
@@ -74,6 +85,13 @@ struct LoginView: View {
                 }
                 
             }
+        }
+        .alert(LoginViewConsts.loginErrorTitle,
+               isPresented: $showErrorAlert) {
+            Button(LoginViewConsts.loginErrorButton,
+                   role: .cancel) {}
+        } message: {
+            Text(errorMessage.isEmpty ? (LoginViewConsts.loginUnknownError) : errorMessage)
         }
         
     }
