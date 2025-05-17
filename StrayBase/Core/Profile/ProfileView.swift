@@ -13,6 +13,7 @@ struct ProfileView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var showDeleteAlert = false
+    @State private var showSignOutAlert = false
     
     var body: some View {
         if let user = viewModel.currentUser {
@@ -58,14 +59,28 @@ struct ProfileView: View {
                 
                 Section(ProfileViewConsts.accountSectionTitle) {
                     Button {
-                        Task {
-                            try await viewModel.signOut()
-                        }
+                        showSignOutAlert = true
                     } label: {
                         SettingsRowView(
                             imageName: ProfileViewConsts.signOutImageName,
                             title: ProfileViewConsts.signOutTitle,
                             tintColor: .red
+                        )
+                    }
+                    .alert(isPresented: $showSignOutAlert) {
+                        Alert(
+                            title: Text(ProfileViewConsts.signOutAlertTitle),
+                            message: Text(ProfileViewConsts.signOutAlertDescription),
+                            primaryButton: .destructive(Text(ProfileViewConsts.signOutAlertButton)) {
+                                Task {
+                                    do {
+                                        try await viewModel.signOut()
+                                    } catch {
+                                        print("DEBUG: Failed to sign out with error - \(error.localizedDescription)")
+                                    }
+                                }
+                            },
+                            secondaryButton: .cancel()
                         )
                     }
                     

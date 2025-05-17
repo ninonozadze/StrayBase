@@ -102,6 +102,10 @@ extension SharedUtils {
             static let deleteAlertTitle: String = "Delete Account"
             static let deleteAlertDescription: String = "Are you sure you want to delete your account?"
             static let deleteAlertButton: String = "Delete"
+            
+            static let signOutAlertTitle: String = "Sign out"
+            static let signOutAlertDescription: String = "Are you sure you want to sign out?"
+            static let signOutAlertButton: String = "Sign out"
         }
         
         struct EmailVerificationView {
