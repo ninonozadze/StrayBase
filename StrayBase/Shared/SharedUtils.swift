@@ -98,6 +98,10 @@ extension SharedUtils {
             
             static let deleteAccountImageName: String = "xmark.circle.fill"
             static let deleteAccountTitle: String = "Delete Account"
+            
+            static let deleteAlertTitle: String = "Delete Account"
+            static let deleteAlertDescription: String = "Are you sure you want to delete your account?"
+            static let deleteAlertButton: String = "Delete"
         }
         
         struct EmailVerificationView {

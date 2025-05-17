@@ -12,6 +12,7 @@ private typealias ProfileViewConsts = SharedUtils.AuthenticationViews.ProfileVie
 struct ProfileView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var showDeleteAlert = false
     
     var body: some View {
         if let user = viewModel.currentUser {
@@ -69,14 +70,28 @@ struct ProfileView: View {
                     }
                     
                     Button {
-                        Task {
-                            try await viewModel.deleteAccount()
-                        }
+                        showDeleteAlert = true
                     } label: {
                         SettingsRowView(
                             imageName: ProfileViewConsts.deleteAccountImageName,
                             title: ProfileViewConsts.deleteAccountTitle,
                             tintColor: .red
+                        )
+                    }
+                    .alert(isPresented: $showDeleteAlert) {
+                        Alert(
+                            title: Text(ProfileViewConsts.deleteAlertTitle),
+                            message: Text(ProfileViewConsts.deleteAlertDescription),
+                            primaryButton: .destructive(Text(ProfileViewConsts.deleteAlertButton)) {
+                                Task {
+                                    do {
+                                        try await viewModel.deleteAccount()
+                                    } catch {
+                                        print("DEBUG: Failed to delete account with error - \(error.localizedDescription)")
+                                    }
+                                }
+                            },
+                            secondaryButton: .cancel()
                         )
                     }
                 }
