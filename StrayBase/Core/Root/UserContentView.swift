@@ -24,13 +24,13 @@ struct UserContentView: View {
             }
             
             NavigationStack {
-                SettingsTabView()
-                    .navigationTitle(TabViewsConst.SettingsTabView.navigationTitle)
+                ProfileTabView()
+                    .navigationTitle(TabViewsConst.ProfileTabView.navigationTitle)
                     .navigationBarTitleDisplayMode(.inline)
             }
             .tabItem {
-                Label(TabViewsConst.SettingsTabView.tabItemLabel,
-                      systemImage: TabViewsConst.SettingsTabView.tabItemImageName)
+                Label(TabViewsConst.ProfileTabView.tabItemLabel,
+                      systemImage: TabViewsConst.ProfileTabView.tabItemImageName)
             }
         }
     }

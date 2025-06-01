@@ -14,11 +14,10 @@ struct ContentView: View {
     var body: some View {
         Group {
             if viewModel.userSession != nil {
-                ProfileView()
+                UserContentView()
             } else {
                 LoginView()
             }
-//            UserContentView() // TODO: tmp
         }
     }
 }

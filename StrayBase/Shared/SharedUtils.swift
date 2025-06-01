@@ -137,10 +137,10 @@ extension SharedUtils {
             static let tabItemImageName: String = "house.fill"
         }
         
-        struct SettingsTabView {
-            static let navigationTitle: String = "Settings"
-            static let tabItemLabel: String = "Settings"
-            static let tabItemImageName: String = "gearshape.fill"
+        struct ProfileTabView {
+            static let navigationTitle: String = "Profile"
+            static let tabItemLabel: String = "Profile"
+            static let tabItemImageName: String = "person.crop.circle.fill"
         }
         
     }
