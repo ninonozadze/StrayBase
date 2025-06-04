@@ -256,4 +256,73 @@ class AuthViewModel: ObservableObject {
         
         print("DEBUG: Current user is \(self.currentUser)")
     }
+    
+    func sendPasswordResetEmail(withEmail email: String) async throws {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            let querySnapshot = try await Firestore.firestore()
+                .collection("users")
+                .whereField("email", isEqualTo: email)
+                .getDocuments()
+            
+            if querySnapshot.documents.isEmpty {
+                throw NSError(
+                    domain: "AuthError",
+                    code: AuthErrorCode.userNotFound.rawValue,
+                    userInfo: [NSLocalizedDescriptionKey: AuthenticationConsts.userNotFoundError]
+                )
+            }
+            
+            try await Auth.auth().sendPasswordReset(withEmail: email)
+            
+        } catch let firestoreError {
+            print("DEBUG: Failed to check email or send password reset with error - \(firestoreError.localizedDescription)")
+            
+            if let nsError = firestoreError as NSError?, nsError.domain == "AuthError" {
+                throw firestoreError
+            }
+            
+            throw handlePasswordResetError(firestoreError)
+        }
+    }
+
+    private func handlePasswordResetError(_ error: Error) -> Error {
+        guard let authError = error as NSError? else {
+            return NSError(
+                domain: "AuthError",
+                code: 0,
+                userInfo: [NSLocalizedDescriptionKey: AuthenticationConsts.resetPasswordUnknownError]
+            )
+        }
+        
+        let errorMessage: String
+        
+        switch AuthErrorCode.Code(rawValue: authError.code) {
+        case .invalidEmail:
+            errorMessage = AuthenticationConsts.invalidEmailError
+            
+        case .userNotFound:
+            errorMessage = AuthenticationConsts.userNotFoundError
+            
+        case .tooManyRequests:
+            errorMessage = AuthenticationConsts.tooManyRequestsError
+            
+        case .networkError:
+            errorMessage = AuthenticationConsts.networkError
+            
+        default:
+            errorMessage = AuthenticationConsts.resetPasswordUnknownError.replacingOccurrences(
+                of: "{1s}",
+                with: authError.localizedDescription
+            )
+        }
+        
+        return NSError(
+            domain: "AuthError",
+            code: authError.code,
+            userInfo: [NSLocalizedDescriptionKey: errorMessage]
+        )
+    }
 }

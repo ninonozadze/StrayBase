@@ -65,6 +65,16 @@ struct LoginView: View {
                 }
                 .disabled(!formIsValid || viewModel.isLoading)
                 .opacity((formIsValid && !viewModel.isLoading) ? 1 : 0.5)
+                
+                NavigationLink {
+                    ForgotPasswordView()
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Text(LoginViewConsts.forgotPasswordText)
+                            .fontWeight(.semibold)
+                            .font(.system(size: 14))
+                }
+                .padding(.top, 12)
 
                 ProgressView()
                     .padding(.top, 10)
@@ -91,7 +101,9 @@ struct LoginView: View {
             Button(LoginViewConsts.loginErrorButton,
                    role: .cancel) {}
         } message: {
-            Text(errorMessage.isEmpty ? (LoginViewConsts.loginUnknownError) : errorMessage)
+            Text(errorMessage.isEmpty
+                 ? (LoginViewConsts.loginUnknownError)
+                 : errorMessage)
         }
         
     }

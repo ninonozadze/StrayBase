@@ -28,6 +28,9 @@ extension SharedUtils {
         static let tokenExpiredError = "Your session has expired. Please try signing in again."
         static let requiresRecentLoginError = "This operation requires recent authentication. Please sign in again."
         static let loginUnknownError = "An unknown error occurred: {1s}"
+        
+        static let userNotFoundError = "No account found with this email address. Please check your email and try again."
+        static let resetPasswordUnknownError = "Failed to send password reset email. Please try again later. Error: {1s}"
     }
     
 }
@@ -47,6 +50,8 @@ extension SharedUtils {
             
             static let signInButtonTitle: String = "SIGN IN"
             static let signInButtonImageName: String = "arrow.right"
+            
+            static let forgotPasswordText: String = "Forgot Password?"
             
             static let notAccountText: String = "Don't have an account?"
             static let signupText: String = "Sign Up"
@@ -121,6 +126,30 @@ extension SharedUtils {
             static let alertRegistrationStatus: String = "Registration Status"
             static let alertRegistrationButton: String = "Continue"
             static let alertRegistrationMessage: String = "Your email has been verified and registration is complete!"
+        }
+        
+        struct ForgotPasswordView {
+            static let forgotPasswordImageName = "lock.shield"
+            
+            static let forgotPasswordTitle = "Reset Password"
+            static let forgotPasswordDescription = "Enter your email address and we'll send you a link to reset your password."
+            
+            static let emailInputTitle = "Email Address"
+            static let emailInputPlaceholder = "name@example.com"
+            
+            static let sendResetEmailButtonTitle = "Send Reset Email"
+            static let sendResetEmailButtonImageName = "envelope"
+            
+            static let backToLoginDescription = "Remember your password?"
+            static let backToLoginText = "Sign In"
+            
+            static let resetPasswordErrorTitle = "Reset Password Failed"
+            static let resetPasswordErrorButton = "OK"
+            static let resetPasswordUnknownError = "An unknown error occurred. Please try again."
+            
+            static let resetPasswordSuccessTitle = "Email Sent"
+            static let resetPasswordSuccessButton = "OK"
+            static let resetEmailSentMessage = "A password reset link has been sent to {1s}. Please check your email and follow the instructions to reset your password."
         }
         
     }

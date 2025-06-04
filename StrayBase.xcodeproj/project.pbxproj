@@ -47,11 +47,6 @@
 			path = StrayBaseTests;
 			sourceTree = "<group>";
 		};
-		6C10F71B2D8D776A00B88859 /* StrayBaseUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StrayBaseUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +83,6 @@
 			children = (
 				6C10F7032D8D776900B88859 /* StrayBase */,
 				6C10F7112D8D776A00B88859 /* StrayBaseTests */,
-				6C10F71B2D8D776A00B88859 /* StrayBaseUITests */,
 				6C10F7022D8D776900B88859 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -167,9 +161,6 @@
 			);
 			dependencies = (
 				6C10F71A2D8D776A00B88859 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				6C10F71B2D8D776A00B88859 /* StrayBaseUITests */,
 			);
 			name = StrayBaseUITests;
 			packageProductDependencies = (
