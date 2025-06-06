@@ -31,6 +31,8 @@ extension SharedUtils {
         
         static let userNotFoundError = "No account found with this email address. Please check your email and try again."
         static let resetPasswordUnknownError = "Failed to send password reset email. Please try again later. Error: {1s}"
+        
+        static let emailNotVerifiedError = "Please verify your email address before signing in. Check your inbox for the verification link."
     }
     
 }
@@ -91,11 +93,6 @@ extension SharedUtils {
         }
         
         struct ProfileView {
-            static let generalSectionTitle: String = "General"
-            
-            static let versionImageName: String = "gear"
-            static let versionTitle: String = "Version"
-            
             static let accountSectionTitle: String = "Account"
             
             static let signOutImageName: String = "arrow.left.circle.fill"

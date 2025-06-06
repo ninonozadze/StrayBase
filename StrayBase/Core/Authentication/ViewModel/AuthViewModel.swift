@@ -45,6 +45,19 @@ class AuthViewModel: ObservableObject {
                 withEmail: email,
                 password: password
             )
+            
+            try await result.user.reload()
+            
+            if !result.user.isEmailVerified {
+                try Auth.auth().signOut()
+                
+                throw NSError(
+                    domain: "AuthError",
+                    code: AuthErrorCode.userNotFound.rawValue,
+                    userInfo: [NSLocalizedDescriptionKey: AuthenticationConsts.emailNotVerifiedError]
+                )
+            }
+            
             self.userSession = result.user
             await fetchUser()
             
@@ -56,10 +69,19 @@ class AuthViewModel: ObservableObject {
     
     private func handleAuthError(_ error: Error) -> Error {
         guard let authError = error as NSError? else {
-            return NSError(domain: "AuthError", code: 0, userInfo: [NSLocalizedDescriptionKey: AuthenticationConsts.loginUnknownError])
+            return NSError(
+                domain: "AuthError",
+                code: 0,
+                userInfo: [NSLocalizedDescriptionKey: AuthenticationConsts.loginUnknownError]
+            )
         }
         
         let errorMessage: String
+        
+        if authError.domain == "AuthError"
+            && authError.localizedDescription == AuthenticationConsts.emailNotVerifiedError {
+            return authError
+        }
         
         switch AuthErrorCode.Code(rawValue: authError.code) {
         case .invalidEmail:
@@ -196,6 +218,8 @@ class AuthViewModel: ObservableObject {
             try Auth.auth().signOut()
             
             verificationMessage = AuthenticationConsts.resentVerificationMessage
+                .replacingOccurrences(of: "{1s}",
+                                      with: pendingData.email)
             
         } catch {
             print("DEBUG: Failed to resend verification email with error - \(error.localizedDescription)")

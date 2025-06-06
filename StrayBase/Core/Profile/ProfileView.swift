@@ -41,22 +41,6 @@ struct ProfileView: View {
                     }
                 }
                 
-                Section(ProfileViewConsts.generalSectionTitle) {
-                    HStack {
-                        SettingsRowView(
-                            imageName: ProfileViewConsts.versionImageName,
-                            title: ProfileViewConsts.versionTitle,
-                            tintColor: Color(.systemGray)
-                        )
-                        
-                        Spacer()
-                        
-                        Text("1.0.0") // TODO: tmp
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-                }
-                
                 Section(ProfileViewConsts.accountSectionTitle) {
                     ConfirmActionButton(viewModel: .init(
                         imageName: ProfileViewConsts.signOutImageName,
