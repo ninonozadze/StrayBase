@@ -163,6 +163,24 @@ extension SharedUtils {
             static let tabItemImageName: String = "house.fill"
         }
         
+        struct SheltersListTabView {
+            static let navigationTitle: String = "Shelters"
+            static let tabItemLabel: String = "Shelters"
+            static let tabItemImageName: String = "building.2.fill"
+        }
+        
+        struct AddStrayTabView {
+            static let navigationTitle: String = "Add Stray"
+            static let tabItemLabel: String = "Add Stray"
+            static let tabItemImageName: String = "plus.circle.fill"
+        }
+        
+        struct FosterListTabView {
+            static let navigationTitle: String = "Foster"
+            static let tabItemLabel: String = "Foster"
+            static let tabItemImageName: String = "person.2.crop.square.stack.fill"
+        }
+        
         struct ProfileTabView {
             static let navigationTitle: String = "Profile"
             static let tabItemLabel: String = "Profile"

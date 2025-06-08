@@ -24,6 +24,36 @@ struct UserContentView: View {
             }
             
             NavigationStack {
+                SheltersListTabView()
+                    .navigationTitle(TabViewsConst.SheltersListTabView.navigationTitle)
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label(TabViewsConst.SheltersListTabView.tabItemLabel,
+                      systemImage: TabViewsConst.SheltersListTabView.tabItemImageName)
+            }
+            
+            NavigationStack {
+                AddStrayTabView()
+                    .navigationTitle(TabViewsConst.AddStrayTabView.navigationTitle)
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label(TabViewsConst.AddStrayTabView.tabItemLabel,
+                      systemImage: TabViewsConst.AddStrayTabView.tabItemImageName)
+            }
+            
+            NavigationStack {
+                FosterListTabView()
+                    .navigationTitle(TabViewsConst.FosterListTabView.navigationTitle)
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label(TabViewsConst.FosterListTabView.tabItemLabel,
+                      systemImage: TabViewsConst.FosterListTabView.tabItemImageName)
+            }
+            
+            NavigationStack {
                 ProfileTabView()
                     .navigationTitle(TabViewsConst.ProfileTabView.navigationTitle)
                     .navigationBarTitleDisplayMode(.inline)
