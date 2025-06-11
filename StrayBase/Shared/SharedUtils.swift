@@ -12,10 +12,10 @@ struct SharedUtils {}
 extension SharedUtils {
     
     struct Authentication {
-        static let verificationMessageWhenSent: String = "A verification email has been sent to {1s}. Please check your inbox and click the verification link before proceeding."
+        static let verificationMessageWhenSent: String = "A verification email has been sent to {1s}. Please check your inbox and click the verification link before proceeding. If you don't see the email, make sure to check your spam or junk folder."
         static let noPendingVerificationMessage: String = "No pending registration found."
         static let successfulVerificationMessage: String = "Email verified successfully! Registration completed."
-        static let notVerifiedMessage: String = "Email not verified yet. Please check your inbox and click the verification link."
+        static let notVerifiedMessage: String = "Email not verified yet. Please check your inbox and click the verification link. If you don't see the email, make sure to check your spam or junk folder."
         static let failedtoVerifyMessage: String = "Failed to verify email: {1s}"
         static let resentVerificationMessage: String = "Verification email resent to {1s}."
         static let failedtoResendVerificationMessage: String = "Failed to resend verification email: {1s}."
@@ -146,7 +146,7 @@ extension SharedUtils {
             
             static let resetPasswordSuccessTitle = "Email Sent"
             static let resetPasswordSuccessButton = "OK"
-            static let resetEmailSentMessage = "A password reset link has been sent to {1s}. Please check your email and follow the instructions to reset your password."
+            static let resetEmailSentMessage = "A password reset link has been sent to {1s}. Please check your email and follow the instructions to reset your password. If you don't see the email, make sure to check your spam or junk folder."
         }
         
     }
@@ -155,38 +155,42 @@ extension SharedUtils {
 
 extension SharedUtils {
     
-    struct TabViews {
-        
-        struct DashboardTabView {
-            static let navigationTitle: String = "Home"
-            static let tabItemLabel: String = "Home"
-            static let tabItemImageName: String = "house.fill"
+    enum tab: Hashable {
+        case dashboard, shelter, addStray, foster, profile
+    }
+    
+}
+
+extension SharedUtils.tab {
+    
+    var tabTitle: String {
+        switch self {
+        case .dashboard:
+            return "Home"
+        case .shelter:
+            return "Shelters"
+        case .addStray:
+            return "Add Stray"
+        case .foster:
+            return "Foster"
+        case .profile:
+            return "Profile"
         }
-        
-        struct SheltersListTabView {
-            static let navigationTitle: String = "Shelters"
-            static let tabItemLabel: String = "Shelters"
-            static let tabItemImageName: String = "building.2.fill"
+    }
+
+    var tabImageName: String {
+        switch self {
+        case .dashboard:
+            return "house"
+        case .shelter:
+            return "mappin.and.ellipse.circle"
+        case .addStray:
+            return "pawprint"
+        case .foster:
+            return "heart.text.square"
+        case .profile:
+            return "person"
         }
-        
-        struct AddStrayTabView {
-            static let navigationTitle: String = "Add Stray"
-            static let tabItemLabel: String = "Add Stray"
-            static let tabItemImageName: String = "plus.circle.fill"
-        }
-        
-        struct FosterListTabView {
-            static let navigationTitle: String = "Foster"
-            static let tabItemLabel: String = "Foster"
-            static let tabItemImageName: String = "person.2.crop.square.stack.fill"
-        }
-        
-        struct ProfileTabView {
-            static let navigationTitle: String = "Profile"
-            static let tabItemLabel: String = "Profile"
-            static let tabItemImageName: String = "person.crop.circle.fill"
-        }
-        
     }
     
 }

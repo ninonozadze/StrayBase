@@ -7,61 +7,32 @@
 
 import SwiftUI
 
-private typealias TabViewsConst = SharedUtils.TabViews
-
 struct UserContentView: View {
     
+    @State private var selectedTab: SharedUtils.tab = .dashboard
+    
     var body: some View {
-        TabView {
-            NavigationStack {
-                DashboardTabView()
-                    .navigationTitle(TabViewsConst.DashboardTabView.navigationTitle)
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .tabItem {
-                Label(TabViewsConst.DashboardTabView.tabItemLabel,
-                      systemImage: TabViewsConst.DashboardTabView.tabItemImageName)
-            }
+        ZStack(alignment: .bottom) {
+            Color.white
+                .ignoresSafeArea()
             
-            NavigationStack {
-                SheltersListTabView()
-                    .navigationTitle(TabViewsConst.SheltersListTabView.navigationTitle)
-                    .navigationBarTitleDisplayMode(.inline)
+            Group {
+                switch selectedTab {
+                case .dashboard:
+                    DashboardTabView()
+                case .shelter:
+                    SheltersListTabView()
+                case .addStray:
+                    AddStrayTabView()
+                case .foster:
+                    FosterListTabView()
+                case .profile:
+                    ProfileView()
+                }
             }
-            .tabItem {
-                Label(TabViewsConst.SheltersListTabView.tabItemLabel,
-                      systemImage: TabViewsConst.SheltersListTabView.tabItemImageName)
-            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             
-            NavigationStack {
-                AddStrayTabView()
-                    .navigationTitle(TabViewsConst.AddStrayTabView.navigationTitle)
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .tabItem {
-                Label(TabViewsConst.AddStrayTabView.tabItemLabel,
-                      systemImage: TabViewsConst.AddStrayTabView.tabItemImageName)
-            }
-            
-            NavigationStack {
-                FosterListTabView()
-                    .navigationTitle(TabViewsConst.FosterListTabView.navigationTitle)
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .tabItem {
-                Label(TabViewsConst.FosterListTabView.tabItemLabel,
-                      systemImage: TabViewsConst.FosterListTabView.tabItemImageName)
-            }
-            
-            NavigationStack {
-                ProfileTabView()
-                    .navigationTitle(TabViewsConst.ProfileTabView.navigationTitle)
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .tabItem {
-                Label(TabViewsConst.ProfileTabView.tabItemLabel,
-                      systemImage: TabViewsConst.ProfileTabView.tabItemImageName)
-            }
+            AnimatedTabBar(selectedTab: $selectedTab)
         }
     }
     
