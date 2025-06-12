@@ -12,7 +12,6 @@ private typealias VerificationViewConsts = SharedUtils.AuthenticationViews.Email
 struct EmailVerificationView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     var dismissAction: () -> Void
-    @State private var showAlert = false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -85,7 +84,7 @@ struct EmailVerificationView: View {
                 viewModel.resetEmailVerificationState()
             } label: {
                 HStack(spacing: 3) {
-                    Text("Back to Registration")
+                    Text(VerificationViewConsts.backButtonTitle)
                         .fontWeight(.bold)
                 }
                 .font(.system(size: 14))
@@ -93,18 +92,5 @@ struct EmailVerificationView: View {
             }
         }
         .padding(.horizontal, 20)
-        .onChange(of: viewModel.isEmailVerified) { newValue in
-            if newValue {
-                showAlert = true
-            }
-        }
-        .alert(VerificationViewConsts.alertRegistrationStatus,
-               isPresented: .constant(viewModel.isEmailVerified)) {
-            Button(VerificationViewConsts.alertRegistrationButton) {
-                dismissAction()
-            }
-        } message: {
-            Text(VerificationViewConsts.alertRegistrationMessage)
-        }
     }
 }
