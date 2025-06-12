@@ -12,13 +12,13 @@ struct SharedUtils {}
 extension SharedUtils {
     
     struct Authentication {
-        static let verificationMessageWhenSent: String = "A verification email has been sent to {1s}. Please check your inbox and click the verification link before proceeding. If you don't see the email, make sure to check your spam or junk folder."
-        static let noPendingVerificationMessage: String = "No pending registration found."
-        static let successfulVerificationMessage: String = "Email verified successfully! Registration completed."
-        static let notVerifiedMessage: String = "Email not verified yet. Please check your inbox and click the verification link. If you don't see the email, make sure to check your spam or junk folder."
-        static let failedtoVerifyMessage: String = "Failed to verify email: {1s}"
-        static let resentVerificationMessage: String = "Verification email resent to {1s}."
-        static let failedtoResendVerificationMessage: String = "Failed to resend verification email: {1s}."
+        static let verificationMessageWhenSent = "A verification email has been sent to {1s}. Please check your inbox and click the verification link before proceeding. If you don't see the email, make sure to check your spam or junk folder."
+        static let noPendingVerificationMessage = "No pending registration found."
+        static let successfulVerificationMessage = "Email verified successfully! Registration completed."
+        static let notVerifiedMessage = "Email not verified yet. Please check your inbox and click the verification link. If you don't see the email, make sure to check your spam or junk folder."
+        static let failedtoVerifyMessage = "Failed to verify email: {1s}"
+        static let resentVerificationMessage = "Verification email resent to {1s}."
+        static let failedtoResendVerificationMessage = "Failed to resend verification email: {1s}."
         
         static let invalidEmailError = "Please enter a valid email address."
         static let userDisabledError = "This account has been disabled. Please contact support."
@@ -42,21 +42,21 @@ extension SharedUtils {
     struct AuthenticationViews {
         
         struct LoginView {
-            static let loginImageName: String = "pet-care"
+            static let loginImageName = "pet-care"
             
-            static let emailInputTitle: String = "Email Address"
-            static let emailInputPlaceholder: String = "name@example.com"
+            static let emailInputTitle = "Email Address"
+            static let emailInputPlaceholder = "name@example.com"
             
-            static let passwordInputTitle: String = "Password"
-            static let passwordInputPlaceholder: String = "Enter your password"
+            static let passwordInputTitle = "Password"
+            static let passwordInputPlaceholder = "Enter your password"
             
-            static let signInButtonTitle: String = "SIGN IN"
-            static let signInButtonImageName: String = "arrow.right"
+            static let signInButtonTitle = "SIGN IN"
+            static let signInButtonImageName = "arrow.right"
             
-            static let forgotPasswordText: String = "Forgot Password?"
+            static let forgotPasswordText = "Forgot Password?"
             
-            static let notAccountText: String = "Don't have an account?"
-            static let signupText: String = "Sign Up"
+            static let notAccountText = "Don't have an account?"
+            static let signupText = "Sign Up"
             
             static let loginErrorTitle = "Sign In Failed"
             static let loginErrorButton = "OK"
@@ -64,65 +64,63 @@ extension SharedUtils {
         }
         
         struct RegistrationView {
-            static let registrationImageName: String = "pet-care"
+            static let registrationImageName = "pet-care"
             
-            static let emailInputTitle: String = "Email Address"
-            static let emailInputPlaceholder: String = "name@example.com"
+            static let emailInputTitle = "Email Address"
+            static let emailInputPlaceholder = "name@example.com"
             
-            static let fullnameInputTitle: String = "Full Name"
-            static let fullnameInputPlaceholder: String = "Enter your name"
+            static let fullnameInputTitle = "Full Name"
+            static let fullnameInputPlaceholder = "Enter your name"
             
-            static let passwordInputTitle: String = "Password"
-            static let passwordInputPlaceholder: String = "Enter your password"
+            static let passwordInputTitle = "Password"
+            static let passwordInputPlaceholder = "Enter your password"
             
-            static let confirmPasswordInputTitle: String = "Confirm Password"
-            static let confirmPasswordInputPlaceholder: String = "Confirm your password"
+            static let confirmPasswordInputTitle = "Confirm Password"
+            static let confirmPasswordInputPlaceholder = "Confirm your password"
             
-            static let signUpButtonTitle: String = "SIGN UP"
-            static let signUpButtonImageName: String = "arrow.right"
+            static let signUpButtonTitle = "SIGN UP"
+            static let signUpButtonImageName = "arrow.right"
             
-            static let signInText: String = "Sign in"
-            static let signInDescription: String = "Already have an account?"
+            static let signInText = "Sign in"
+            static let signInDescription = "Already have an account?"
             
-            static let passwordCheckmarkIconName: String = "checkmark.circle.fill"
-            static let passwordXmarkIconName: String = "xmark.circle.fill"
+            static let passwordCheckmarkIconName = "checkmark.circle.fill"
+            static let passwordXmarkIconName = "xmark.circle.fill"
             
-            static let registrationErrorTitle: String = "Registration Error"
-            static let registrationErrorButton: String = "OK"
-            static let registrationUnknownError: String = "Unknown error."
+            static let registrationErrorTitle = "Registration Error"
+            static let registrationErrorButton = "OK"
+            static let registrationUnknownError = "Unknown error."
         }
         
         struct ProfileView {
-            static let accountSectionTitle: String = "Account"
+            static let accountSectionTitle = "Account"
             
-            static let signOutImageName: String = "arrow.left.circle.fill"
-            static let signOutTitle: String = "Sign Out"
+            static let signOutImageName = "arrow.left.circle.fill"
+            static let signOutTitle = "Sign Out"
             
-            static let deleteAccountImageName: String = "xmark.circle.fill"
-            static let deleteAccountTitle: String = "Delete Account"
+            static let deleteAccountImageName = "xmark.circle.fill"
+            static let deleteAccountTitle = "Delete Account"
             
-            static let deleteAlertTitle: String = "Delete Account"
-            static let deleteAlertDescription: String = "Are you sure you want to delete your account?"
-            static let deleteAlertButton: String = "Delete"
+            static let deleteAlertTitle = "Delete Account"
+            static let deleteAlertDescription = "Are you sure you want to delete your account?"
+            static let deleteAlertButton = "Delete"
             
-            static let signOutAlertTitle: String = "Sign out"
-            static let signOutAlertDescription: String = "Are you sure you want to sign out?"
-            static let signOutAlertButton: String = "Sign out"
+            static let signOutAlertTitle = "Sign out"
+            static let signOutAlertDescription = "Are you sure you want to sign out?"
+            static let signOutAlertButton = "Sign out"
         }
         
         struct EmailVerificationView {
-            static let verificationMainImageName: String = "envelope.circle.fill"
-            static let verificationMainText: String = "Verify Your Email"
+            static let verificationMainImageName = "envelope.circle.fill"
+            static let verificationMainText = "Verify Your Email"
             
-            static let verificationButtonTitle: String = "I've Verified My Email"
-            static let verificationButtonIcon: String = "checkmark.circle"
+            static let verificationButtonTitle = "I've Verified My Email"
+            static let verificationButtonIcon = "checkmark.circle"
             
-            static let resendButtonTitle: String = "Resend Email"
-            static let resendButtonIcon: String = "arrow.clockwise"
+            static let resendButtonTitle = "Resend Email"
+            static let resendButtonIcon = "arrow.clockwise"
             
-            static let alertRegistrationStatus: String = "Registration Status"
-            static let alertRegistrationButton: String = "Continue"
-            static let alertRegistrationMessage: String = "Your email has been verified and registration is complete!"
+            static let backButtonTitle = "Back to Registration"
         }
         
         struct ForgotPasswordView {
