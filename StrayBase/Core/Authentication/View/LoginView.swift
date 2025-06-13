@@ -112,10 +112,15 @@ struct LoginView: View {
 extension LoginView: AuthenticationFormProtocol {
     var formIsValid: Bool {
         return !email.isEmpty
-        && email.contains("@")
+        && isValidEmail(email)
         && !password.isEmpty
         && password.count > 5
     }
+}
+
+func isValidEmail(_ email: String) -> Bool {
+    let emailRegex = #"^\S+@\S+\.\S+$"#
+    return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
 }
 
 struct LoginView_Previews: PreviewProvider {

@@ -145,7 +145,7 @@ struct RegistrationView: View {
 extension RegistrationView: AuthenticationFormProtocol {
     var formIsValid: Bool {
         return !email.isEmpty
-        && email.contains("@")
+        && isValidEmail(email)
         && !password.isEmpty
         && password.count > 5
         && confirmPassword == password
