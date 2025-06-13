@@ -19,7 +19,7 @@ struct EmailVerificationView: View {
             
             Image(systemName: VerificationViewConsts.verificationMainImageName)
                 .font(.system(size: 80))
-                .foregroundColor(.blue)
+                .foregroundColor(.cyan)
                 .padding(.bottom, 20)
             
             Text(VerificationViewConsts.verificationMainText)
@@ -56,11 +56,11 @@ struct EmailVerificationView: View {
                             .fontWeight(.semibold)
                         Image(systemName: VerificationViewConsts.resendButtonIcon)
                     }
-                    .foregroundColor(.blue)
+                    .foregroundColor(.cyan)
                     .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.blue, lineWidth: 1)
+                            .stroke(Color.cyan, lineWidth: 1)
                     )
                 }
                 .disabled(viewModel.isLoading)

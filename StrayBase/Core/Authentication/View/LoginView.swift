@@ -78,6 +78,7 @@ struct LoginView: View {
                     Text(LoginViewConsts.forgotPasswordText)
                             .fontWeight(.semibold)
                             .font(.system(size: 14))
+                            .foregroundColor(.cyan)
                 }
                 .padding(.top, 12)
 
@@ -93,8 +94,10 @@ struct LoginView: View {
                 } label: {
                     HStack(spacing: 3) {
                         Text(LoginViewConsts.notAccountText)
+                            .foregroundColor(.cyan)
                         Text(LoginViewConsts.signupText)
                             .fontWeight(.bold)
+                            .foregroundColor(.cyan)
                     }
                     .font(.system(size: 14))
                 }

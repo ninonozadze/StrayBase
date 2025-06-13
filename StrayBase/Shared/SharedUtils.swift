@@ -177,7 +177,7 @@ extension SharedUtils.tab {
         case .addStray:
             return "Add Stray"
         case .foster:
-            return "Foster"
+            return "Foster Homes"
         case .profile:
             return "Profile"
         }

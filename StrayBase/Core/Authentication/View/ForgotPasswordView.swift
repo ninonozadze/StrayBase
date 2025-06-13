@@ -28,7 +28,7 @@ struct ForgotPasswordView: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: 80, height: 100)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.cyan)
                     .padding(.vertical, 32)
                 
                 VStack(alignment: .leading, spacing: 12) {
@@ -86,8 +86,10 @@ struct ForgotPasswordView: View {
                 } label: {
                     HStack(spacing: 3) {
                         Text(ForgotPasswordViewConsts.backToLoginDescription)
+                            .foregroundColor(.cyan)
                         Text(ForgotPasswordViewConsts.backToLoginText)
                             .fontWeight(.bold)
+                            .foregroundColor(.cyan)
                     }
                     .font(.system(size: 14))
                 }
@@ -116,7 +118,7 @@ struct ForgotPasswordView: View {
 
 extension ForgotPasswordView: AuthenticationFormProtocol {
     var formIsValid: Bool {
-        return !email.isEmpty && email.contains("@")
+        return !email.isEmpty && SharedUtils.isValidEmail(email)
     }
 }
 

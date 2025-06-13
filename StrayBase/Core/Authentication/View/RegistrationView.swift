@@ -134,8 +134,10 @@ struct RegistrationView: View {
             } label: {
                 HStack(spacing: 3) {
                     Text(RegistrationViewConsts.signInDescription)
+                        .foregroundColor(.cyan)
                     Text(RegistrationViewConsts.signInText)
                         .fontWeight(.bold)
+                        .foregroundColor(.cyan)
                 }
                 .font(.system(size: 14))
             }
