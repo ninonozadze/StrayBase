@@ -48,30 +48,39 @@ struct RegistrationView: View {
             VStack(spacing: 24) {
                 InputView(
                     text: $email,
-                    title: RegistrationViewConsts.emailInputTitle,
-                    placeholder: RegistrationViewConsts.emailInputPlaceholder
+                    viewModel: .init(
+                        title: RegistrationViewConsts.emailInputTitle,
+                        placeholder: RegistrationViewConsts.emailInputPlaceholder
+                    )
                 )
                 .autocapitalization(.none)
                 
                 InputView(
                     text: $fullname,
-                    title: RegistrationViewConsts.fullnameInputTitle,
-                    placeholder: RegistrationViewConsts.fullnameInputPlaceholder
+                    viewModel: .init(
+                        title: RegistrationViewConsts.fullnameInputTitle,
+                        placeholder: RegistrationViewConsts.fullnameInputPlaceholder
+                    )
                 )
                 
                 InputView(
                     text: $password,
-                    title: RegistrationViewConsts.passwordInputTitle,
-                    placeholder: RegistrationViewConsts.passwordInputPlaceholder,
-                    isSecuredField: true
+                    viewModel: .init(
+                        title: RegistrationViewConsts.passwordInputTitle,
+                        placeholder: RegistrationViewConsts.passwordInputPlaceholder,
+                        isSecuredField: true,
+                        showPasswordToggle: true
+                    )
                 )
                 
                 ZStack(alignment: .trailing) {
                     InputView(
                         text: $confirmPassword,
-                        title: RegistrationViewConsts.confirmPasswordInputTitle,
-                        placeholder: RegistrationViewConsts.confirmPasswordInputPlaceholder,
-                        isSecuredField: true
+                        viewModel: .init(
+                            title: RegistrationViewConsts.confirmPasswordInputTitle,
+                            placeholder: RegistrationViewConsts.confirmPasswordInputPlaceholder,
+                            isSecuredField: true
+                        )
                     )
                     
                     if !password.isEmpty && !confirmPassword.isEmpty {

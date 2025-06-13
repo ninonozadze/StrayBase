@@ -152,6 +152,13 @@ extension SharedUtils {
 }
 
 extension SharedUtils {
+    struct InputView {
+        static let hideIcon: String = "eye.slash"
+        static let unhideIcon: String = "eye"
+    }
+}
+
+extension SharedUtils {
     
     enum tab: Hashable {
         case dashboard, shelter, addStray, foster, profile
