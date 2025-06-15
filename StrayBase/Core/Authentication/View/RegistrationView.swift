@@ -103,24 +103,25 @@ struct RegistrationView: View {
             .padding(.top, 12)
             
             PrimaryButton(
-                title: RegistrationViewConsts.signUpButtonTitle,
-                imageName: RegistrationViewConsts.signUpButtonImageName
-            ) {
-                Task {
-                    do {
-                        try await viewModel.createUser(
-                            withEmail: email,
-                            password: password,
-                            fullname: fullname
-                        )
-                    } catch {
-                        showErrorAlert = true
+                viewModel: .init(
+                    title: RegistrationViewConsts.signUpButtonTitle,
+                    imageName: RegistrationViewConsts.signUpButtonImageName,
+                    isEnabled: formIsValid && !viewModel.isLoading,
+                    action: {
+                        Task {
+                            do {
+                                try await viewModel.createUser(
+                                    withEmail: email,
+                                    password: password,
+                                    fullname: fullname
+                                )
+                            } catch {
+                                showErrorAlert = true
+                            }
+                        }
                     }
-
-                }
-            }
-            .disabled(!formIsValid || viewModel.isLoading)
-            .opacity((formIsValid && !viewModel.isLoading) ? 1 : 0.5)
+                )
+            )
             
             if viewModel.isLoading {
                 ProgressView()

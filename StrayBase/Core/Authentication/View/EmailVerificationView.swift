@@ -36,15 +36,17 @@ struct EmailVerificationView: View {
             
             VStack(spacing: 16) {
                 PrimaryButton(
-                    title: VerificationViewConsts.verificationButtonTitle,
-                    imageName: VerificationViewConsts.verificationButtonIcon
-                ) {
-                    Task {
-                        try await viewModel.checkEmailVerificationAndCompleteRegistration()
-                    }
-                }
-                .disabled(viewModel.isLoading)
-                .opacity(viewModel.isLoading ? 0.5 : 1.0)
+                    viewModel: .init(
+                        title: VerificationViewConsts.verificationButtonTitle,
+                        imageName: VerificationViewConsts.verificationButtonIcon,
+                        isEnabled: !viewModel.isLoading,
+                        action: {
+                            Task {
+                                try await viewModel.checkEmailVerificationAndCompleteRegistration()
+                            }
+                        }
+                    )
+                )
                 
                 Button(action: {
                     Task {

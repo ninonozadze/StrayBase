@@ -57,23 +57,25 @@ struct ForgotPasswordView: View {
                 .padding(.top, 24)
                 
                 PrimaryButton(
-                    title: ForgotPasswordViewConsts.sendResetEmailButtonTitle,
-                    imageName: ForgotPasswordViewConsts.sendResetEmailButtonImageName
-                ) {
-                    Task {
-                        do {
-                            try await viewModel.sendPasswordResetEmail(withEmail: email)
-                            successMessage = ForgotPasswordViewConsts.resetEmailSentMessage
-                                .replacingOccurrences(of: "{1s}", with: email)
-                            showSuccessAlert = true
-                        } catch {
-                            errorMessage = error.localizedDescription
-                            showErrorAlert = true
+                    viewModel: .init(
+                        title: ForgotPasswordViewConsts.sendResetEmailButtonTitle,
+                        imageName: ForgotPasswordViewConsts.sendResetEmailButtonImageName,
+                        isEnabled: formIsValid && !viewModel.isLoading,
+                        action: {
+                            Task {
+                                do {
+                                    try await viewModel.sendPasswordResetEmail(withEmail: email)
+                                    successMessage = ForgotPasswordViewConsts.resetEmailSentMessage
+                                        .replacingOccurrences(of: "{1s}", with: email)
+                                    showSuccessAlert = true
+                                } catch {
+                                    errorMessage = error.localizedDescription
+                                    showErrorAlert = true
+                                }
+                            }
                         }
-                    }
-                }
-                .disabled(!formIsValid || viewModel.isLoading)
-                .opacity((formIsValid && !viewModel.isLoading) ? 1 : 0.5)
+                    )
+                )
                 
                 ProgressView()
                     .padding(.top, 10)

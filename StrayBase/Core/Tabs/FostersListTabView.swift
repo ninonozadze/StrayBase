@@ -1,5 +1,5 @@
 //
-//  FosterListTabView.swift
+//  FostersListTabView.swift
 //  StrayBase
 //
 //  Created by Nino Nozadze on 02.05.25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FosterListTabView: View {
+struct FostersListTabView: View {
     var body: some View {
         VStack {
             Image("pet-care") // TODO: tmp
@@ -27,8 +27,8 @@ struct FosterListTabView: View {
     }
 }
 
-struct FosterListTabView_Previews: PreviewProvider {
+struct FostersListTabView_Previews: PreviewProvider {
     static var previews: some View {
-        FosterListTabView()
+        FostersListTabView()
     }
 }

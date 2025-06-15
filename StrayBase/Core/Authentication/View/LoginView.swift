@@ -53,23 +53,25 @@ struct LoginView: View {
                 .padding(.top, 12)
                 
                 PrimaryButton(
-                    title: LoginViewConsts.signInButtonTitle,
-                    imageName: LoginViewConsts.signInButtonImageName
-                ) {
-                    Task {
-                        do {
-                            try await viewModel.signIn(
-                                withEmail: email,
-                                password: password
-                            )
-                        } catch {
-                            errorMessage = error.localizedDescription
-                            showErrorAlert = true
+                    viewModel: .init(
+                        title: LoginViewConsts.signInButtonTitle,
+                        imageName: LoginViewConsts.signInButtonImageName,
+                        isEnabled: formIsValid && !viewModel.isLoading,
+                        action: {
+                            Task {
+                                do {
+                                    try await viewModel.signIn(
+                                        withEmail: email,
+                                        password: password
+                                    )
+                                } catch {
+                                    errorMessage = error.localizedDescription
+                                    showErrorAlert = true
+                                }
+                            }
                         }
-                    }
-                }
-                .disabled(!formIsValid || viewModel.isLoading)
-                .opacity((formIsValid && !viewModel.isLoading) ? 1 : 0.5)
+                    )
+                )
                 
                 NavigationLink {
                     ForgotPasswordView()

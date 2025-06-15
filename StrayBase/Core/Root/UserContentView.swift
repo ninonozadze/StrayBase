@@ -25,7 +25,7 @@ struct UserContentView: View {
                 case .addStray:
                     AddStrayTabView()
                 case .foster:
-                    FosterListTabView()
+                    FostersListTabView()
                 case .profile:
                     ProfileView()
                 }
