@@ -45,3 +45,19 @@ struct ConfirmActionButtonViewModel {
     let alertConfirmButtonTitle: String
     let action: () async -> Void
 }
+
+struct ConfirmActionButton_Previews: PreviewProvider {
+    static var previews: some View {
+        ConfirmActionButton(
+            viewModel: .init(
+                imageName: "checkmark",
+                title: "Confirm",
+                tintColor: .gray,
+                alertTitle: "title",
+                alertMessage: "message",
+                alertConfirmButtonTitle: "Confirm",
+                action: {}
+            )
+        )
+    }
+}

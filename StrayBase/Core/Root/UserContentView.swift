@@ -10,6 +10,7 @@ import SwiftUI
 struct UserContentView: View {
     
     @State private var selectedTab: SharedUtils.tab = .dashboard
+    private let tabBarHeight: CGFloat = 80
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -30,9 +31,12 @@ struct UserContentView: View {
                     ProfileView()
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.bottom, tabBarHeight + 4)
+
             
             AnimatedTabBar(selectedTab: $selectedTab)
+                .frame(height: tabBarHeight)
         }
     }
     
