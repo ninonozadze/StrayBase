@@ -46,10 +46,9 @@ struct ForgotPasswordView: View {
                 VStack(spacing: 24) {
                     InputView(
                         text: $email,
-                        viewModel: .init(
-                            title: ForgotPasswordViewConsts.emailInputTitle,
-                            placeholder: ForgotPasswordViewConsts.emailInputPlaceholder
-                        )
+                        title: ForgotPasswordViewConsts.emailInputTitle,
+                        placeholder: ForgotPasswordViewConsts.emailInputPlaceholder,
+                        style: .classic
                     )
                     .autocapitalization(.none)
                 }

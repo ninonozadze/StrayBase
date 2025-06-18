@@ -7,80 +7,80 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct InputView: View {
     
     @Binding var text: String
-    let viewModel: InputViewModel
+    let title: String
+    let placeholder: String
+    let style: Style
+    var isSecure: Bool = false
+    var showPasswordToggle: Bool = false
     
-    @State private var isPasswordVisible: Bool = false
+    @State private var isPasswordVisible = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(viewModel.title)
-                .foregroundStyle(Color(.darkGray))
-                .fontWeight(.semibold)
-                .font(.footnote)
+        VStack(alignment: .leading, spacing: style == .classic ? 12 : 4) {
             
-            if viewModel.isSecuredField {
-                HStack {
-                    if isPasswordVisible {
-                        TextField(viewModel.placeholder, text: $text)
-                            .font(.system(size: 14))
-                    } else {
-                        SecureField(viewModel.placeholder, text: $text)
-                            .font(.system(size: 14))
-                    }
-                    
-                    if viewModel.showPasswordToggle {
-                        Button(action: {
-                            isPasswordVisible.toggle()
-                        }) {
-                            Image(systemName: isPasswordVisible
-                                  ? SharedUtils.InputView.hideIcon
-                                  : SharedUtils.InputView.unhideIcon)
-                            .foregroundColor(.gray)
+            Text(title)
+                .font(style == .classic ? .footnote : .subheadline)
+                .fontWeight(style == .classic ? .semibold : .regular)
+                .foregroundColor(style == .classic ? Color(.darkGray) : .secondary)
+            
+            Group {
+                if isSecure {
+                    HStack {
+                        if isPasswordVisible {
+                            TextField(placeholder, text: $text)
+                                .font(.system(size: 14))
+                        } else {
+                            SecureField(placeholder, text: $text)
+                                .font(.system(size: 14))
                         }
-                        .frame(width: 24, height: 24)
+                        
+                        if showPasswordToggle {
+                            Button {
+                                isPasswordVisible.toggle()
+                            } label: {
+                                Image(systemName: isPasswordVisible
+                                      ? SharedUtils.InputView.hideIcon
+                                      : SharedUtils.InputView.unhideIcon)
+                                .foregroundColor(.gray)
+                            }
+                            .frame(width: 24, height: 24)
+                        }
                     }
-                    
+                } else {
+                    TextField(placeholder, text: $text)
+                        .font(.system(size: 14))
                 }
-            } else {
-                TextField(viewModel.placeholder, text: $text)
-                    .font(.system(size: 14))
             }
-            
-            Divider()
+            .modifier(StyleModifier(style: style))
         }
     }
 }
 
-struct InputViewModel {
-    let title: String
-    let placeholder: String
-    var isSecuredField: Bool = false
-    var showPasswordToggle: Bool = false
+extension InputView {
+    
+    enum Style {
+        case classic
+        case rounded
+    }
+    
 }
 
-struct InputView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 20) {
-            InputView(
-                text: .constant(""),
-                viewModel: .init(
-                    title: "Email Address",
-                    placeholder: "name@example.com"
-                )
-            )
-            
-            InputView(
-                text: .constant("password123"),
-                viewModel: .init(
-                    title: "Password",
-                    placeholder: "Enter your password",
-                    isSecuredField: true
-                )
-            )
+private struct StyleModifier: ViewModifier {
+    let style: InputView.Style
+    
+    func body(content: Content) -> some View {
+        switch style {
+        case .classic:
+            content
+            Divider()
+        case .rounded:
+            content
+                .textFieldStyle(.roundedBorder)
         }
-        .padding()
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-private typealias ProfileViewConsts = SharedUtils.AuthenticationViews.ProfileView
+private typealias ProfileViewConsts = SharedUtils.TabViews.ProfileView
 
 struct ProfileView: View {
     

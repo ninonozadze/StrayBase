@@ -2,10 +2,8 @@
 //  SharedUtils.swift
 //  StrayBase
 //
-//  Created by Nino Nozadze on 21.03.25.
+//  Created by Nino Nozadze on 18.06.25.
 //
-
-import SwiftUI
 
 struct SharedUtils {}
 
@@ -92,24 +90,6 @@ extension SharedUtils {
             static let registrationUnknownError = "Unknown error."
         }
         
-        struct ProfileView {
-            static let accountSectionTitle = "Account"
-            
-            static let signOutImageName = "arrow.left.circle.fill"
-            static let signOutTitle = "Sign Out"
-            
-            static let deleteAccountImageName = "xmark.circle.fill"
-            static let deleteAccountTitle = "Delete Account"
-            
-            static let deleteAlertTitle = "Delete Account"
-            static let deleteAlertDescription = "Are you sure you want to delete your account?"
-            static let deleteAlertButton = "Delete"
-            
-            static let signOutAlertTitle = "Sign out"
-            static let signOutAlertDescription = "Are you sure you want to sign out?"
-            static let signOutAlertButton = "Sign out"
-        }
-        
         struct EmailVerificationView {
             static let verificationMainImageName = "envelope.circle.fill"
             static let verificationMainText = "Verify Your Email"
@@ -149,62 +129,4 @@ extension SharedUtils {
         
     }
     
-}
-
-extension SharedUtils {
-    struct InputView {
-        static let hideIcon: String = "eye.slash"
-        static let unhideIcon: String = "eye"
-    }
-}
-
-extension SharedUtils {
-    
-    enum tab: Hashable {
-        case dashboard, shelter, addStray, foster, profile
-    }
-    
-}
-
-extension SharedUtils.tab {
-    
-    var tabTitle: String {
-        switch self {
-        case .dashboard:
-            return "Home"
-        case .shelter:
-            return "Shelters"
-        case .addStray:
-            return "Add Stray"
-        case .foster:
-            return "Fosters"
-        case .profile:
-            return "Profile"
-        }
-    }
-
-    var tabImageName: String {
-        switch self {
-        case .dashboard:
-            return "house"
-        case .shelter:
-            return "mappin.and.ellipse.circle"
-        case .addStray:
-            return "pawprint"
-        case .foster:
-            return "heart.text.square"
-        case .profile:
-            return "person"
-        }
-    }
-    
-}
-
-extension SharedUtils {
-    static func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
 }

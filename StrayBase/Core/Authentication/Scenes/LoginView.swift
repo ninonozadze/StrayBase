@@ -32,21 +32,19 @@ struct LoginView: View {
                 VStack(spacing: 24) {
                     InputView(
                         text: $email,
-                        viewModel: .init(
-                            title: LoginViewConsts.emailInputTitle,
-                            placeholder: LoginViewConsts.emailInputPlaceholder
-                        )
+                        title: LoginViewConsts.emailInputTitle,
+                        placeholder: LoginViewConsts.emailInputPlaceholder,
+                        style: .classic
                     )
                     .autocapitalization(.none)
                     
                     InputView(
-                        text: $password,
-                        viewModel: .init(
-                            title: LoginViewConsts.passwordInputTitle,
-                            placeholder: LoginViewConsts.passwordInputPlaceholder,
-                            isSecuredField: true,
-                            showPasswordToggle: true
-                        )
+                        text:  $password,
+                        title: LoginViewConsts.passwordInputTitle,
+                        placeholder: LoginViewConsts.passwordInputPlaceholder,
+                        style: .classic,
+                        isSecure: true,
+                        showPasswordToggle: true
                     )
                 }
                 .padding(.horizontal)
