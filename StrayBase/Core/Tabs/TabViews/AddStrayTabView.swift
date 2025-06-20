@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddStrayTabView: View {
     var body: some View {
-//        ReportStrayView()
+        ReportStrayView()
     }
 }
 

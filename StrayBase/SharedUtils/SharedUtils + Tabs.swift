@@ -51,6 +51,10 @@ extension SharedUtils {
     
     struct TabViews {
         
+        struct ReportStrayView {
+            // TODO: implementation
+        }
+        
         struct ProfileView {
             static let accountSectionTitle = "Account"
             
