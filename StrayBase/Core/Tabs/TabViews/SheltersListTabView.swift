@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct SheltersListTabView: View {
+    
     var body: some View {
-//        ShelterListView()
+        ShelterListView()
     }
+    
 }
 
 struct SheltersListTabView_Previews: PreviewProvider {
+    
     static var previews: some View {
         SheltersListTabView()
     }
+    
 }

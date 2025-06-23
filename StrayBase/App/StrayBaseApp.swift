@@ -12,6 +12,7 @@ import Firebase
 struct StrayBaseApp: App {
     
     @StateObject var viewModel = AuthViewModel()
+    @StateObject var locationViewModel = LocationModel()
     
     init() {
         FirebaseApp.configure()
@@ -21,6 +22,10 @@ struct StrayBaseApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(viewModel)
+                .environmentObject(locationViewModel)
+                .onAppear {
+                    locationViewModel.setupLocationManager()
+                }
         }
     }
     
