@@ -29,6 +29,7 @@ class ShelterSearchViewModel: ObservableObject {
         
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "animal shelter nearby"
+//        request.naturalLanguageQuery = "veterinary clinic"
         request.resultTypes = .pointOfInterest
         
         request.region = locationModel.region

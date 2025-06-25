@@ -22,13 +22,13 @@ struct UserContentView: View {
                 case .dashboard:
                     DashboardTabView()
                 case .shelter:
-                    SheltersListTabView()
+                    ShelterListTabView()
                 case .addStray:
                     AddStrayTabView()
                 case .foster:
-                    FostersListTabView()
+                    VeterinaryClinicListTabView()
                 case .profile:
-                    ProfileView()
+                    ProfileTabView()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
