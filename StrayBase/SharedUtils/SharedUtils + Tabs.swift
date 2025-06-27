@@ -8,7 +8,7 @@
 extension SharedUtils {
     
     enum tab: Hashable {
-        case dashboard, shelter, addStray, foster, profile
+        case dashboard, shelter, addStray, clinic, profile
     }
     
 }
@@ -23,8 +23,8 @@ extension SharedUtils.tab {
             return "Shelters"
         case .addStray:
             return "Add Stray"
-        case .foster:
-            return "Fosters"
+        case .clinic:
+            return "Clinics"
         case .profile:
             return "Profile"
         }
@@ -38,7 +38,7 @@ extension SharedUtils.tab {
             return "mappin.and.ellipse.circle"
         case .addStray:
             return "pawprint"
-        case .foster:
+        case .clinic:
             return "heart.text.square"
         case .profile:
             return "person"

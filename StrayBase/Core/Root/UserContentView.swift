@@ -25,7 +25,7 @@ struct UserContentView: View {
                     ShelterListTabView()
                 case .addStray:
                     AddStrayTabView()
-                case .foster:
+                case .clinic:
                     VeterinaryClinicListTabView()
                 case .profile:
                     ProfileTabView()

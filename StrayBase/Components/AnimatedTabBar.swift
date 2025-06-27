@@ -13,7 +13,7 @@ struct AnimatedTabBar: View {
     @Binding var selectedTab: SharedUtils.tab
     
     private let allTabs: [SharedUtils.tab] = [
-        .dashboard, .shelter, .addStray, .foster, .profile
+        .dashboard, .shelter, .addStray, .clinic, .profile
     ]
     
     var body: some View {
