@@ -29,7 +29,6 @@ class ShelterSearchViewModel: ObservableObject {
         
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "animal shelter nearby"
-//        request.naturalLanguageQuery = "veterinary clinic"
         request.resultTypes = .pointOfInterest
         
         request.region = locationModel.region
@@ -65,9 +64,20 @@ struct ShelterListView: View {
     
     @EnvironmentObject var locationViewModel: LocationModel
     @StateObject private var viewModel: ShelterSearchViewModel
+    @State private var searchText = ""
     
     init() {
         _viewModel = StateObject(wrappedValue: ShelterSearchViewModel(locationViewModel: LocationModel()))
+    }
+    
+    private var filteredShelters: [Shelter] {
+        if searchText.isEmpty {
+            return viewModel.shelters
+        } else {
+            return viewModel.shelters.filter { shelter in
+                shelter.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
     }
     
     var body: some View {
@@ -78,11 +88,11 @@ struct ShelterListView: View {
                 } else if let error = viewModel.errorMessage {
                     Text("Error: \(error)")
                         .foregroundColor(.red)
-                } else if viewModel.shelters.isEmpty {
+                } else if filteredShelters.isEmpty {
                     Text("No shelters found.")
                         .foregroundColor(.gray)
                 } else {
-                    List(viewModel.shelters) { shelter in
+                    List(filteredShelters) { shelter in
                         VStack(alignment: .leading) {
                             Text(shelter.name)
                                 .font(.headline)
@@ -112,6 +122,7 @@ struct ShelterListView: View {
             .onAppear {
                 viewModel.searchNearbyAnimalShelters()
             }
+            .searchable(text: $searchText, prompt: "Search shelters")
         }
     }
 }
