@@ -89,8 +89,9 @@ struct ShelterListView: View {
                     Text("Error: \(error)")
                         .foregroundColor(.red)
                 } else if filteredShelters.isEmpty {
-                    Text("No shelters found.")
-                        .foregroundColor(.gray)
+//                    Text("No shelters found.")
+//                        .foregroundColor(.gray)
+                    emptyStateView
                 } else {
                     List(filteredShelters) { shelter in
                         VStack(alignment: .leading) {
@@ -127,6 +128,39 @@ struct ShelterListView: View {
     }
 }
 
-#Preview {
-    ShelterListView()
+extension ShelterListView {
+    
+    private var emptyStateView: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "house.slash")
+                .font(.system(size: 60))
+                .foregroundColor(.secondary)
+
+            VStack(spacing: 8) {
+                Text("No Shelters Found")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+
+                Text("Try adjusting your search or filters")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+
+            Button("Clear Filters") {
+                searchText = ""
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+    }
+    
+}
+
+struct ShelterListView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        ShelterListView()
+    }
+    
 }
