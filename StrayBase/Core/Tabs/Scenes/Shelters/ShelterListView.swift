@@ -11,7 +11,7 @@ struct Shelter: Identifiable {
 }
 
 class ShelterSearchViewModel: ObservableObject {
-        
+    
     @Published var shelters: [Shelter] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
@@ -44,7 +44,7 @@ class ShelterSearchViewModel: ObservableObject {
                 guard let mapItems = response?.mapItems else { return }
                 
                 let userLocation = CLLocation(latitude: self?.locationModel.region.center.latitude ?? 41.7132045,
-                                               longitude: self?.locationModel.region.center.longitude ?? 44.7824601)
+                                              longitude: self?.locationModel.region.center.longitude ?? 44.7824601)
                 
                 self?.shelters = mapItems.map { item in
                     Shelter(
@@ -85,41 +85,37 @@ struct ShelterListView: View {
             Group {
                 if viewModel.isLoading {
                     ProgressView("Searching shelters…")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let error = viewModel.errorMessage {
-                    Text("Error: \(error)")
-                        .foregroundColor(.red)
+                    VStack {
+                        Text("Error: \(error)")
+                            .foregroundColor(.red)
+                            .multilineTextAlignment(.center)
+                        
+                        Button("Retry") {
+                            viewModel.searchNearbyAnimalShelters()
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .padding(.top)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding()
                 } else if filteredShelters.isEmpty {
-//                    Text("No shelters found.")
-//                        .foregroundColor(.gray)
                     emptyStateView
                 } else {
-                    List(filteredShelters) { shelter in
-                        VStack(alignment: .leading) {
-                            Text(shelter.name)
-                                .font(.headline)
-                            Text(shelter.address)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            if let phone = shelter.phone {
-                                Text("Phone: \(phone)")
-                                    .font(.footnote)
-                            }
-                            
-                            if let website = shelter.website {
-                                Text("Website: \(String(describing: website))")
-                                    .font(.footnote)
-                                    .foregroundColor(.blue)
-                            }
-                            
-                            if let distance = shelter.distance {
-                                Text(String(format: "Distance: %.1f km", (distance) / 1000))
-                                    .font(.footnote)
+                    ScrollView {
+                        LazyVStack(spacing: 12) {
+                            ForEach(filteredShelters) { shelter in
+                                OrganizationCard(shelter: shelter)
+                                    .padding(.horizontal)
                             }
                         }
+                        .padding(.vertical)
                     }
                 }
             }
             .navigationTitle("Animal Shelters")
+            .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 viewModel.searchNearbyAnimalShelters()
             }
@@ -135,17 +131,18 @@ extension ShelterListView {
             Image(systemName: "house.slash")
                 .font(.system(size: 60))
                 .foregroundColor(.secondary)
-
+            
             VStack(spacing: 8) {
                 Text("No Shelters Found")
                     .font(.title2)
                     .fontWeight(.semibold)
-
+                
                 Text("Try adjusting your search or filters")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
             }
-
+            
             Button("Clear Filters") {
                 searchText = ""
             }
@@ -154,7 +151,6 @@ extension ShelterListView {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
     }
-    
 }
 
 struct ShelterListView_Previews: PreviewProvider {
