@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct AddStrayTabView: View {
+    
     var body: some View {
-        ReportStrayView()
+//        ReportStrayView()
     }
+    
 }
 
 struct AddStrayTabView_Previews: PreviewProvider {
+    
     static var previews: some View {
         AddStrayTabView()
     }
+    
 }
