@@ -38,14 +38,16 @@ struct OrganizationCard: View {
                 InfoRow(
                     icon: "location.fill",
                     iconColor: .blue,
-                    text: shelter.address
+                    text: shelter.address,
+                    textColor: .secondary
                 )
                 
                 if let phone = shelter.phone {
                     InfoRow(
                         icon:"phone.fill",
                         iconColor: .green,
-                        text: phone
+                        text: phone,
+                        textColor: .secondary
                     )
                 }
                 
@@ -53,7 +55,8 @@ struct OrganizationCard: View {
                     InfoRow(
                         icon:"globe",
                         iconColor: .purple,
-                        text: website
+                        text: website,
+                        textColor: .blue
                     )
                 }
             }
