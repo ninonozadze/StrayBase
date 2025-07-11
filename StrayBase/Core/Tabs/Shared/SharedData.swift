@@ -22,3 +22,49 @@ enum Size: String, CaseIterable {
     case medium = "medium"
     case large = "large"
 }
+
+enum OrganizationType: String, CaseIterable {
+    
+    case shelter = "Shelters"
+    case clinic = "Veterinary Clinics"
+    
+    var keyword: String {
+        switch self {
+        case .shelter:
+            return "animal shelter nearby"
+        case .clinic:
+            return "veterinary clinic"
+        }
+    }
+    
+    var navTitle: String {
+        switch self {
+        case .shelter:
+            return "Animal Shelters"
+        case .clinic:
+            return "Veterinary Clinics"
+        }
+    }
+    
+    var searchStateDesc: String {
+        return "Searching \(self.rawValue)…"
+    }
+    
+    var searchTitle: String {
+        return "Search \(self.rawValue)"
+    }
+    
+    var notFoundTitle: String {
+        return "No \(self.rawValue) found"
+    }
+    
+}
+
+struct OrganizationConsts {
+    static let unknown = "Unknown"
+    static let noAddress = "No address"
+    static let retryButtonLabel = "Retry"
+    static let notFoundImageName = "house.slash"
+    static let notFoundSuggestionText = "Try adjusting your search or filters"
+    static let clearFilters = "Clear Filters"
+}

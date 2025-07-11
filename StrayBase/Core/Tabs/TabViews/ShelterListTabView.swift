@@ -10,7 +10,7 @@ import SwiftUI
 struct ShelterListTabView: View {
     
     var body: some View {
-        ShelterListView()
+        OrganizationListView(organizationType: .shelter)
     }
     
 }

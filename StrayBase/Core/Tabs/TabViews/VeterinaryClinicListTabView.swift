@@ -10,7 +10,7 @@ import SwiftUI
 struct VeterinaryClinicListTabView: View {
     
     var body: some View {
-//        RescueOrganizationsView()
+        OrganizationListView(organizationType: .clinic)
     }
     
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct ConfirmActionButton: View {
     let viewModel: ConfirmActionButtonViewModel
     @State private var showAlert = false
-
+    
     var body: some View {
         Button {
             showAlert = true

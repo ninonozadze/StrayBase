@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct OrganizationCard: View {
-    let shelter: Shelter
+    let shelter: Organization
     
     @Environment(\.openURL) private var openURL
     
@@ -62,6 +62,7 @@ struct OrganizationCard: View {
             }
             
             HStack(spacing: 12) {
+                // სიმულატორზე არ იმუშავებს, რადგან Phone აპლიკაცია არ აქვს
                 if let phone = shelter.phone,
                    let phoneURL = URL(string: "tel:\(phone)") {
                     ActionButton(
@@ -92,7 +93,7 @@ struct OrganizationCard: View {
                 )
                 
                 if let website = shelter.website,
-                    let websiteURL = URL(string: website) {
+                   let websiteURL = URL(string: website) {
                     ActionButton(
                         action: {
                             openURL(websiteURL)

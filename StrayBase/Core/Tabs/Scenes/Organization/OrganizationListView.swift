@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-struct Shelter: Identifiable {
+struct Organization: Identifiable {
     let id = UUID()
     let name: String
     let address: String
@@ -10,25 +10,30 @@ struct Shelter: Identifiable {
     let distance: Double?
 }
 
-class ShelterSearchViewModel: ObservableObject {
+class OrganizationSearchViewModel: ObservableObject {
     
-    @Published var shelters: [Shelter] = []
+    @Published var organization: [Organization] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
     
     private var locationModel: LocationModel
+    private var keyword: String
     
-    init(locationViewModel: LocationModel) {
+    init(
+        locationViewModel: LocationModel,
+        keyword: String
+    ) {
         self.locationModel = locationViewModel
+        self.keyword = keyword
     }
     
-    func searchNearbyAnimalShelters() {
+    func searchNearbyOrganizations() {
         isLoading = true
         errorMessage = nil
-        shelters = []
+        organization = []
         
         let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "animal shelter nearby"
+        request.naturalLanguageQuery = keyword
         request.resultTypes = .pointOfInterest
         
         request.region = locationModel.region
@@ -42,14 +47,14 @@ class ShelterSearchViewModel: ObservableObject {
                     return
                 }
                 guard let mapItems = response?.mapItems else { return }
-                
+                // აქაც გმირთა მოედანი ავიღე default მნიშვნელობად
                 let userLocation = CLLocation(latitude: self?.locationModel.region.center.latitude ?? 41.7132045,
                                               longitude: self?.locationModel.region.center.longitude ?? 44.7824601)
                 
-                self?.shelters = mapItems.map { item in
-                    Shelter(
-                        name: item.name ?? "Unknown",
-                        address: item.placemark.title ?? "No address",
+                self?.organization = mapItems.map { item in
+                    Organization(
+                        name: item.name ?? OrganizationConsts.unknown,
+                        address: item.placemark.title ?? OrganizationConsts.noAddress,
                         phone: item.phoneNumber,
                         website: item.url?.absoluteString,
                         distance: item.placemark.location?.distance(from: userLocation)
@@ -60,22 +65,26 @@ class ShelterSearchViewModel: ObservableObject {
     }
 }
 
-struct ShelterListView: View {
+struct OrganizationListView: View {
     
     @EnvironmentObject var locationViewModel: LocationModel
-    @StateObject private var viewModel: ShelterSearchViewModel
+    @StateObject private var viewModel: OrganizationSearchViewModel
     @State private var searchText = ""
     
-    init() {
-        _viewModel = StateObject(wrappedValue: ShelterSearchViewModel(locationViewModel: LocationModel()))
+    private var organizationType: OrganizationType
+    
+    init(organizationType: OrganizationType) {
+        self.organizationType = organizationType
+        _viewModel = StateObject(wrappedValue: OrganizationSearchViewModel(locationViewModel: LocationModel(),
+                                                                           keyword: organizationType.keyword))
     }
     
-    private var filteredShelters: [Shelter] {
+    private var filteredShelters: [Organization] {
         if searchText.isEmpty {
-            return viewModel.shelters
+            return viewModel.organization
         } else {
-            return viewModel.shelters.filter { shelter in
-                shelter.name.localizedCaseInsensitiveContains(searchText)
+            return viewModel.organization.filter { organization in
+                organization.name.localizedCaseInsensitiveContains(searchText)
             }
         }
     }
@@ -84,7 +93,7 @@ struct ShelterListView: View {
         NavigationView {
             Group {
                 if viewModel.isLoading {
-                    ProgressView("Searching shelters…")
+                    ProgressView(organizationType.searchStateDesc)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let error = viewModel.errorMessage {
                     VStack {
@@ -92,8 +101,8 @@ struct ShelterListView: View {
                             .foregroundColor(.red)
                             .multilineTextAlignment(.center)
                         
-                        Button("Retry") {
-                            viewModel.searchNearbyAnimalShelters()
+                        Button(OrganizationConsts.retryButtonLabel) {
+                            viewModel.searchNearbyOrganizations()
                         }
                         .buttonStyle(.borderedProminent)
                         .padding(.top)
@@ -114,36 +123,36 @@ struct ShelterListView: View {
                     }
                 }
             }
-            .navigationTitle("Animal Shelters")
+            .navigationTitle(organizationType.navTitle)
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
-                viewModel.searchNearbyAnimalShelters()
+                viewModel.searchNearbyOrganizations()
             }
-            .searchable(text: $searchText, prompt: "Search shelters")
+            .searchable(text: $searchText, prompt: organizationType.searchTitle)
         }
     }
 }
 
-extension ShelterListView {
+extension OrganizationListView {
     
     private var emptyStateView: some View {
         VStack(spacing: 20) {
-            Image(systemName: "house.slash")
+            Image(systemName: OrganizationConsts.notFoundImageName)
                 .font(.system(size: 60))
                 .foregroundColor(.secondary)
             
             VStack(spacing: 8) {
-                Text("No Shelters Found")
+                Text(organizationType.notFoundTitle)
                     .font(.title2)
                     .fontWeight(.semibold)
                 
-                Text("Try adjusting your search or filters")
+                Text(OrganizationConsts.notFoundSuggestionText)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
             }
             
-            Button("Clear Filters") {
+            Button(OrganizationConsts.clearFilters) {
                 searchText = ""
             }
             .buttonStyle(.borderedProminent)
@@ -153,10 +162,10 @@ extension ShelterListView {
     }
 }
 
-struct ShelterListView_Previews: PreviewProvider {
+struct OrganizationListView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ShelterListView()
+        OrganizationListView(organizationType: .shelter)
     }
     
 }

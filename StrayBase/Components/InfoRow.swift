@@ -12,7 +12,7 @@ struct InfoRow: View {
     let iconColor: Color
     let text: String
     let textColor: Color
-
+    
     var body: some View {
         HStack(alignment: .top) {
             Image(systemName: icon)
@@ -20,7 +20,6 @@ struct InfoRow: View {
                 .frame(width: 16)
             Text(text)
                 .font(.subheadline)
-//                .foregroundColor(.secondary)
                 .foregroundColor(textColor)
                 .lineLimit(2)
             Spacer()
