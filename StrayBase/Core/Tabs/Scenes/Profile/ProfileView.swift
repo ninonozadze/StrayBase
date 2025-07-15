@@ -12,6 +12,7 @@ private typealias ProfileViewConsts = SharedUtils.TabViews.ProfileView
 struct ProfileView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var showReportStray = false
     @State private var showDeleteAlert = false
     @State private var showSignOutAlert = false
     
@@ -41,6 +42,15 @@ struct ProfileView: View {
                     }
                 }
                 
+                Section(ProfileViewConsts.reportStrayTitle) {
+                    ActionRowButton(
+                        action: { showReportStray = true },
+                        leadingImage: ProfileViewConsts.reportImageName,
+                        title: ProfileViewConsts.reportTitle,
+                        subtitle: ProfileViewConsts.reportSubtitle
+                    )
+                }
+                
                 Section(ProfileViewConsts.accountSectionTitle) {
                     ConfirmActionButton(viewModel: .init(
                         imageName: ProfileViewConsts.signOutImageName,
@@ -57,7 +67,7 @@ struct ProfileView: View {
                             }
                         }
                     ))
-
+                    
                     ConfirmActionButton(viewModel: .init(
                         imageName: ProfileViewConsts.deleteAccountImageName,
                         title: ProfileViewConsts.deleteAccountTitle,
@@ -74,6 +84,9 @@ struct ProfileView: View {
                         }
                     ))
                 }
+            }
+            .sheet(isPresented: $showReportStray) {
+                // TODO: open report page
             }
         }
         
