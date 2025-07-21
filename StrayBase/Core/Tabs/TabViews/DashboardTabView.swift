@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct DashboardTabView: View {
+    
     var body: some View {
-//        DashboardView()
+        DashboardView()
     }
+    
 }
 
 struct DashboardTabView_Previews: PreviewProvider {
+    
     static var previews: some View {
         DashboardTabView()
     }
+    
 }
