@@ -23,7 +23,7 @@ struct LoginView: View {
             VStack {
                 Spacer()
                 
-                Image(LoginViewConsts.loginImageName)
+                Image(SharedUtils.appIcon)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 120)

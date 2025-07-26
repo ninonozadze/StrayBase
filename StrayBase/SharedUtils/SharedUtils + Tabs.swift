@@ -51,6 +51,13 @@ extension SharedUtils {
     
     struct TabViews {
         
+        struct DashboardView {
+            static let navTitle = "Stray Animals"
+            static let searchPrompt = "Search animals, ID, or organization"
+            static let totelAnimalTitle = "Total Animals"
+            static let organizationTitle = "Organizations"
+        }
+        
         struct ReportPage {
             static let navTitle = "Report Stray Animal"
             static let headerTitle = "Help a stray"

@@ -36,7 +36,7 @@ struct OrganizationCard: View {
             
             VStack(alignment: .leading, spacing: 8) {
                 InfoRow(
-                    icon: "location.fill",
+                    icon: SharedUtils.OrganizationCard.location,
                     iconColor: .blue,
                     text: shelter.address,
                     textColor: .secondary
@@ -44,7 +44,7 @@ struct OrganizationCard: View {
                 
                 if let phone = shelter.phone {
                     InfoRow(
-                        icon:"phone.fill",
+                        icon: SharedUtils.OrganizationCard.phone,
                         iconColor: .green,
                         text: phone,
                         textColor: .secondary
@@ -53,7 +53,7 @@ struct OrganizationCard: View {
                 
                 if let website = shelter.website {
                     InfoRow(
-                        icon:"globe",
+                        icon: SharedUtils.OrganizationCard.website,
                         iconColor: .purple,
                         text: website,
                         textColor: .blue
@@ -69,8 +69,8 @@ struct OrganizationCard: View {
                         action: {
                             openURL(phoneURL)
                         },
-                        imageName: "phone",
-                        text: "Call",
+                        imageName: SharedUtils.OrganizationCard.Buttons.phoneImage,
+                        text:  SharedUtils.OrganizationCard.Buttons.phoneText,
                         backgroundColor: .blue
                     )
                 }
@@ -87,8 +87,8 @@ struct OrganizationCard: View {
                             mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
                         }
                     },
-                    imageName: "location",
-                    text: "Directions",
+                    imageName:  SharedUtils.OrganizationCard.Buttons.locationImage,
+                    text:  SharedUtils.OrganizationCard.Buttons.locationText,
                     backgroundColor: .green
                 )
                 
@@ -98,8 +98,8 @@ struct OrganizationCard: View {
                         action: {
                             openURL(websiteURL)
                         },
-                        imageName: "globe",
-                        text: "Website",
+                        imageName:  SharedUtils.OrganizationCard.Buttons.websiteImage,
+                        text:  SharedUtils.OrganizationCard.Buttons.websiteText,
                         backgroundColor: .purple
                     )
                 }

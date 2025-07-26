@@ -37,11 +37,11 @@ extension SharedUtils {
 
 extension SharedUtils {
     
+    static let appIcon = "pet-care"
+    
     struct AuthenticationViews {
         
         struct LoginView {
-            static let loginImageName = "pet-care"
-            
             static let emailInputTitle = "Email Address"
             static let emailInputPlaceholder = "name@example.com"
             
@@ -62,8 +62,6 @@ extension SharedUtils {
         }
         
         struct RegistrationView {
-            static let registrationImageName = "pet-care"
-            
             static let emailInputTitle = "Email Address"
             static let emailInputPlaceholder = "name@example.com"
             

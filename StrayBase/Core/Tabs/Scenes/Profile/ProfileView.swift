@@ -86,7 +86,7 @@ struct ProfileView: View {
                 }
             }
             .sheet(isPresented: $showReportStray) {
-                // TODO: open report page
+                ReportStrayView()
             }
         }
         

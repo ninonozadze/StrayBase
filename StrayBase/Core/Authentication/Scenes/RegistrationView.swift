@@ -39,7 +39,7 @@ struct RegistrationView: View {
         Spacer()
         
         VStack {
-            Image(RegistrationViewConsts.registrationImageName)
+            Image(SharedUtils.appIcon)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 100, height: 120)
