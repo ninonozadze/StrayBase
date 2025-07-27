@@ -13,6 +13,7 @@ struct ReportStrayView: View {
     private typealias ReportPageConsts = SharedUtils.TabViews.ReportPage
     
     @State private var form = ReportStrayForm()
+    @StateObject private var animalRepository = AnimalRepository()
 
     @State private var isSubmitting = false
     @State private var showingSuccessAlert = false
@@ -338,7 +339,29 @@ struct ReportStrayView: View {
     }
     
     private func submitReport() {
-        // TODO: implementation
+        isSubmitting = true
+        
+        Task {
+            do {
+                let documentId = try await animalRepository.saveAnimalReport(from: form)
+                
+                await MainActor.run {
+                    isSubmitting = false
+                    showingSuccessAlert = true
+                }
+                
+                print("Animal report saved successfully with ID: \(documentId)")
+                
+            } catch {
+                await MainActor.run {
+                    isSubmitting = false
+                    errorMessage = error.localizedDescription
+                    showingErrorAlert = true
+                }
+                
+                print("Error saving animal report: \(error)")
+            }
+        }
     }
     
     private func clearForm() {
