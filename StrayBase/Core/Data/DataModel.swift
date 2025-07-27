@@ -172,6 +172,11 @@ class AnimalRepository: ObservableObject {
     func saveAnimalReport(from form: ReportStrayForm) async throws -> String {
         var animal = Animal(from: form)
         
+        let existing = try await firestoreService.animalExists(withAnimalId: animal.animalId)
+        if existing {
+            throw FirestoreError.duplicateAnimalId
+        }
+
         let timestamp = Int(Date().timeIntervalSince1970)
         let animalIdForFiles = form.animal.id.isEmpty ? UUID().uuidString : form.animal.id
         
@@ -266,6 +271,7 @@ enum FirestoreError: LocalizedError {
     case invalidDocumentID
     case networkError
     case encodingError
+    case duplicateAnimalId
     
     var errorDescription: String? {
         switch self {
@@ -275,6 +281,8 @@ enum FirestoreError: LocalizedError {
             return "Network connection error"
         case .encodingError:
             return "Data encoding error"
+        case .duplicateAnimalId:
+                    return "An animal with this ID already exists."
         }
     }
 }
@@ -295,3 +303,14 @@ enum StorageError: LocalizedError {
         }
     }
 }
+
+extension FirestoreService {
+    func animalExists(withAnimalId animalId: String) async throws -> Bool {
+        let snapshot = try await db.collection("animals")
+            .whereField("animalId", isEqualTo: animalId)
+            .limit(to: 1)
+            .getDocuments()
+        return !snapshot.documents.isEmpty
+    }
+}
+
