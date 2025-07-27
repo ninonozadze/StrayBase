@@ -334,8 +334,7 @@ struct ReportStrayView: View {
         !form.animal.id.isEmpty &&
         !form.contact.name.isEmpty &&
         !form.contact.phone.isEmpty &&
-        !form.contact.email.isEmpty &&
-        form.animal.image != nil
+        !form.contact.email.isEmpty
     }
     
     private func submitReport() {

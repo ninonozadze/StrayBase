@@ -5,19 +5,19 @@
 //  Created by Nino Nozadze on 20.06.25.
 //
 
-enum AnimalType: String, CaseIterable {
+enum AnimalType: String, CaseIterable, Codable {
     case dog = "dog"
     case cat = "cat"
     case other = "other"
 }
 
-enum Gender: String, CaseIterable {
+enum Gender: String, CaseIterable, Codable {
     case male = "male"
     case female = "female"
     case unknown = "unknown"
 }
 
-enum Size: String, CaseIterable {
+enum Size: String, CaseIterable, Codable {
     case small = "small"
     case medium = "medium"
     case large = "large"
