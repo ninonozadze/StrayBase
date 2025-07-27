@@ -314,3 +314,10 @@ extension FirestoreService {
     }
 }
 
+struct AnimalMock: Identifiable {
+    var id: String
+    var name: String
+    var animalId: String
+    var imageURL: String
+    var reporterName: String
+}

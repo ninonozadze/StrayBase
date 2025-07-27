@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct AnimalRow: View {
-    let animal: Animal
+    let animal: AnimalMock
     
     var body: some View {
         HStack(spacing: 16) {
-            AsyncImage(url: URL(string: animal.photoURL)) { image in
+            AsyncImage(url: URL(string: animal.imageURL)) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             } placeholder: {
-                Image(systemName: SharedUtils.appIcon)
+                Image(SharedUtils.appIcon)
                     .font(.title)
                     .foregroundColor(.gray.opacity(0.6))
                     .frame(width: 70, height: 70)
@@ -35,7 +35,7 @@ struct AnimalRow: View {
                     
                     Spacer()
                     
-                    Text("ID: \(animal.id)")
+                    Text("ID: \(animal.animalId)")
                         .font(.caption)
                         .fontWeight(.medium)
                         .padding(.horizontal, 8)
@@ -50,7 +50,7 @@ struct AnimalRow: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
-                    Text(animal.reporterOrganization)
+                    Text(animal.reporterName)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .lineLimit(2)
