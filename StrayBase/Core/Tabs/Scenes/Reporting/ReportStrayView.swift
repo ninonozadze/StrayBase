@@ -13,7 +13,7 @@ struct ReportStrayView: View {
     private typealias ReportPageConsts = SharedUtils.TabViews.ReportPage
     
     @State private var form = ReportStrayForm()
-    @StateObject private var animalRepository = AnimalRepository()
+    @EnvironmentObject var animalRepository: AnimalRepository
 
     @State private var isSubmitting = false
     @State private var showingSuccessAlert = false

@@ -85,12 +85,22 @@ class FirestoreService: ObservableObject {
     func getActiveAnimals() async throws -> [Animal] {
         let snapshot = try await db.collection("animals")
             .whereField("isActive", isEqualTo: true)
-            .order(by: "dateReported", descending: true)
             .getDocuments()
         
-        return try snapshot.documents.compactMap { document in
-            try document.data(as: Animal.self)
+        
+        let animals = try snapshot.documents.compactMap { document in
+            let data = document.data()
+            
+            do {
+                let animal = try document.data(as: Animal.self)
+                return animal
+            } catch {
+                return nil
+            }
         }
+        
+        let sortedAnimals = animals.sorted { $0.dateReported > $1.dateReported }
+        return sortedAnimals
     }
     
     func getAnimalsByType(_ type: AnimalType) async throws -> [Animal] {
@@ -169,6 +179,12 @@ class AnimalRepository: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
     
+    init() {
+        Task {
+            await loadAnimals()
+        }
+    }
+    
     func saveAnimalReport(from form: ReportStrayForm) async throws -> String {
         var animal = Animal(from: form)
         
@@ -204,7 +220,9 @@ class AnimalRepository: ObservableObject {
         errorMessage = nil
         
         do {
-            animals = try await firestoreService.getActiveAnimals()
+            let loadedAnimals = try await firestoreService.getActiveAnimals()
+            animals = loadedAnimals
+            
         } catch {
             errorMessage = "Failed to load animals: \(error.localizedDescription)"
         }
@@ -282,7 +300,7 @@ enum FirestoreError: LocalizedError {
         case .encodingError:
             return "Data encoding error"
         case .duplicateAnimalId:
-                    return "An animal with this ID already exists."
+            return "An animal with this ID already exists."
         }
     }
 }
@@ -312,12 +330,4 @@ extension FirestoreService {
             .getDocuments()
         return !snapshot.documents.isEmpty
     }
-}
-
-struct AnimalMock: Identifiable {
-    var id: String
-    var name: String
-    var animalId: String
-    var imageURL: String
-    var reporterName: String
 }

@@ -13,6 +13,7 @@ struct StrayBaseApp: App {
     
     @StateObject var viewModel = AuthViewModel()
     @StateObject var locationViewModel = LocationModel()
+    @StateObject var animalRepository = AnimalRepository()
     
     init() {
         FirebaseApp.configure()
@@ -23,6 +24,7 @@ struct StrayBaseApp: App {
             ContentView()
                 .environmentObject(viewModel)
                 .environmentObject(locationViewModel)
+                .environmentObject(animalRepository)
                 .onAppear {
                     locationViewModel.setupLocationManager()
                 }

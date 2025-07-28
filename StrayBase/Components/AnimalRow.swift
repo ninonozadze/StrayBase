@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct AnimalRow: View {
-    let animal: AnimalMock
+    let animal: Animal
     
     var body: some View {
         HStack(spacing: 16) {
-            AsyncImage(url: URL(string: animal.imageURL)) { image in
+            AsyncImage(url: URL(string: animal.imageURL ?? "")) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             } placeholder: {
                 Image(SharedUtils.appIcon)
-                    .font(.title)
+                    .resizable()
+                    .scaledToFill()
                     .foregroundColor(.gray.opacity(0.6))
                     .frame(width: 70, height: 70)
                     .background(Color.gray.opacity(0.1))
