@@ -12,6 +12,8 @@ struct DashboardView: View {
     @EnvironmentObject var animalRepository: AnimalRepository
     @State private var searchText = ""
     @State private var showingFilterSheet = false
+    @State private var animalToDelete: Animal?
+    @State private var showingDeleteAlert = false
     
     var filteredAnimals: [Animal] {
         let allAnimals = animalRepository.animals
@@ -47,8 +49,11 @@ struct DashboardView: View {
                 
                 List(filteredAnimals) { animal in
                     ZStack {
-                        AnimalRow(animal: animal)
-                            .padding(.vertical, 4)
+                        AnimalRow(animal: animal) { animalToDelete in
+                            self.animalToDelete = animalToDelete
+                            self.showingDeleteAlert = true
+                        }
+                        .padding(.vertical, 4)
                         
                         NavigationLink("", destination: AnimalDetailView(animal: animal))
                             .opacity(0)
@@ -62,6 +67,28 @@ struct DashboardView: View {
             }
             .navigationTitle(SharedUtils.TabViews.DashboardView.navTitle)
             .navigationBarTitleDisplayMode(.large)
+            .alert("Delete Animal", isPresented: $showingDeleteAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Delete", role: .destructive) {
+                    if let animal = animalToDelete {
+                        deleteAnimal(animal)
+                    }
+                }
+            } message: {
+                if let animal = animalToDelete {
+                    Text("Are you sure you want to delete \(animal.name) (ID: \(animal.animalId))? This action cannot be undone.")
+                }
+            }
+        }
+    }
+    
+    private func deleteAnimal(_ animal: Animal) {
+        Task {
+            do {
+                try await animalRepository.deleteAnimal(animal)
+            } catch {
+                print("Failed to delete animal: \(error.localizedDescription)")
+            }
         }
     }
 }

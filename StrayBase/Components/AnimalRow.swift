@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AnimalRow: View {
     let animal: Animal
+    let onDelete: (Animal) -> Void
     
     var body: some View {
         HStack(spacing: 16) {
@@ -68,6 +69,14 @@ struct AnimalRow: View {
         .overlay(
             RoundedRectangle(cornerRadius: 16)
                 .stroke(Color.gray.opacity(0.1), lineWidth: 1)
+        )
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 0.5)
+                .onEnded { _ in
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                    impactFeedback.impactOccurred()
+                    onDelete(animal)
+                }
         )
     }
 }
