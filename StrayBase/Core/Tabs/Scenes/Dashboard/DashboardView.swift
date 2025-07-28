@@ -43,14 +43,20 @@ struct DashboardView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top, 10)
+                .padding(.bottom, 10)
                 
                 List(filteredAnimals) { animal in
-                    AnimalRow(animal: animal)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .padding(.vertical, 4)
+                    ZStack {
+                        AnimalRow(animal: animal)
+                            .padding(.vertical, 4)
+                        
+                        NavigationLink("", destination: AnimalDetailView(animal: animal))
+                            .opacity(0)
+                    }
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
                 }
-                .listStyle(PlainListStyle())
+                .listStyle(.plain)
                 .searchable(text: $searchText,
                             prompt: SharedUtils.TabViews.DashboardView.searchPrompt)
             }
